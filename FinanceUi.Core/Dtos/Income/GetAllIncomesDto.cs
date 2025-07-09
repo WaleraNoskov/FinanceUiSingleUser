@@ -1,7 +1,6 @@
 ﻿using FinanceUi.Core.Contracts;
-using FinanceUi.Core.Entities;
 
-namespace FinanceUi.Core.Dtos;
+namespace FinanceUi.Core.Dtos.Income;
 
 public class GetAllIncomesDto
 {
