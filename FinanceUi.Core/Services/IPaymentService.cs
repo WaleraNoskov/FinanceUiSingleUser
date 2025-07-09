@@ -6,9 +6,9 @@ namespace FinanceUi.Core.Services;
 
 public interface IPaymentService
 {
-    Task<PaginationResult<Payment>> GetAllAsync(GetAllPaymentsDto dto);
-    Task<Payment?> GetByIdAsync(Guid paymentId);
-    Task<Guid> Create(Payment payment);
-    Task UpdateAsync(Payment payment);
+    Task<PaginationResult<PaymentDto>> GetAllAsync(GetAllPaymentsDto dto);
+    Task<PaymentDto?> GetByIdAsync(Guid paymentId);
+    Task<Guid> CreateAsync(BriefPaymentDto dto);
+    Task<bool> UpdateAsync(BriefPaymentDto dto);
     Task DeleteAsync(Guid id);
 }

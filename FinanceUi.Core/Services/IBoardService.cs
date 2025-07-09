@@ -9,6 +9,6 @@ public interface IBoardService
     Task<PaginationResult<BoardDto>> GetAllAsync(GetAllBoardsDto dto);
     Task<BoardDto?> GetByIdAsync(Guid id);
     Task<Guid> CreateBoard(BriefBoardDto dto);
-    Task UpdateBoard(BriefBoardDto dto);
+    Task<bool> UpdateBoard(BriefBoardDto dto);
     Task DeleteBoard(Guid id);
 }

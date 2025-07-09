@@ -7,9 +7,9 @@ namespace FinanceUi.Core.Services;
 
 public interface IIncomeService
 {
-    Task<PaginationResult<Income>> GetAllAsync(GetAllIncomesDto dto);
-    Task<Income?> GetByIdAsync(Guid id);
-    Task<Guid> CreateAsync(Income income);
-    Task UpdateAsync(Income income);
+    Task<PaginationResult<IncomeDto>> GetAllAsync(GetAllIncomesDto dto);
+    Task<IncomeDto?> GetByIdAsync(Guid id);
+    Task<Guid> CreateAsync(BriefIncomeDto income);
+    Task<bool> UpdateAsync(BriefIncomeDto income);
     Task DeleteAsync(Guid id);
 }

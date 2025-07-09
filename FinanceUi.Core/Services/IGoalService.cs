@@ -7,9 +7,9 @@ namespace FinanceUi.Core.Services;
 
 public interface IGoalService
 {
-    Task<PaginationResult<Goal>> GetAllAsync(GetAllGoalsDto dto);
-    Task<Goal?> GetByIdAsync(Guid id);
-    Task<Guid> CreateAsync(Goal goal);
-    Task UpdateAsync(Goal goal);
+    Task<PaginationResult<GoalDto>> GetAllAsync(GetAllGoalsDto dto);
+    Task<GoalDto?> GetByIdAsync(Guid id);
+    Task<Guid> CreateAsync(BriefGoalDto dto);
+    Task<bool> UpdateAsync(BriefGoalDto dto);
     Task DeleteAsync(Guid id);
 }
