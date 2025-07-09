@@ -1,10 +1,11 @@
 ﻿using FinanceUi.Core.Contracts;
 
-namespace FinanceUi.Core.Dtos;
+namespace FinanceUi.Core.Dtos.Goal;
 
-public class GetAllBoardsDto
+public class GetAllGoalsDto
 {
     public PaginationParams PaginationParams { get; set; }
     public SortingParams SortingParams { get; set; }
-    public string? Filter { get; set; }
+    public string? Title { get; set; }
+    public Guid BoardId { get; set; }
 }

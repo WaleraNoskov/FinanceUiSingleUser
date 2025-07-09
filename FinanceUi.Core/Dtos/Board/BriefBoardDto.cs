@@ -1,4 +1,4 @@
-﻿namespace FinanceUi.Core.Dtos;
+﻿namespace FinanceUi.Core.Dtos.Board;
 
 public class BriefBoardDto
 {

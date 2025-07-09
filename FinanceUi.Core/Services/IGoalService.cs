@@ -1,5 +1,6 @@
 ﻿using FinanceUi.Core.Contracts;
 using FinanceUi.Core.Dtos;
+using FinanceUi.Core.Dtos.Goal;
 using FinanceUi.Core.Entities;
 
 namespace FinanceUi.Core.Services;
