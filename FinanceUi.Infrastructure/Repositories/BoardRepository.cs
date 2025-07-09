@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using FinanceUi.Core.Contracts;
 using FinanceUi.Core.Dtos;
+using FinanceUi.Core.Entities;
 using FinanceUi.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,9 +24,6 @@ public class BoardRepository(AppDbContext dbContext) : IBoardRepository
             .Take(dto.PaginationParams.PageSize);
 
         var items = await paginated
-            .Include(b => b.Goals)
-            .Include(b => b.Payments)
-            .Include(b => b.Incomes)
             .Select(b => new BoardDto
             {
                 Id = b.Id,
@@ -41,23 +39,48 @@ public class BoardRepository(AppDbContext dbContext) : IBoardRepository
         return new PaginationResult<BoardDto>(items, count);
     }
 
-    public Task<BoardDto?> GetByIdAsync(Guid id)
+    public async Task<BoardDto?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await dbContext.Boards
+            .Select(b => new BoardDto()
+            {
+                Id = b.Id,
+                Title = b.Title,
+                IncomesCount = b.Incomes.Count,
+                PaymentsCount = b.Payments.Count,
+                GoalsCount = b.Goals.Count
+            })
+            .FirstOrDefaultAsync(b => b.Id == id);
     }
 
-    public Task<Guid> CreateBoard(BriefBoardDto dto)
+    public async Task<Guid> CreateBoard(BriefBoardDto dto)
     {
-        throw new NotImplementedException();
+        var board = new Board { Title = dto.Title };
+        await dbContext.AddAsync(board);
+        await dbContext.SaveChangesAsync();
+        
+        return board.Id;
     }
 
-    public Task UpdateBoard(BriefBoardDto dto)
+    public async Task<bool> UpdateBoard(BriefBoardDto dto)
     {
-        throw new NotImplementedException();
+        var board = await dbContext.Boards.FindAsync(dto.Id);
+        if (board is null)
+            return false;
+
+        board.Title = dto.Title;
+        await dbContext.SaveChangesAsync();
+        return true;
     }
 
-    public Task DeleteBoard(Guid id)
+    public async Task DeleteBoard(Guid id)
     {
-        throw new NotImplementedException();
+        var board = await dbContext.Boards.FindAsync(id);
+        
+        if(board is null)
+            return;
+        
+        dbContext.Remove(board);
+        await dbContext.SaveChangesAsync();
     }
 }
