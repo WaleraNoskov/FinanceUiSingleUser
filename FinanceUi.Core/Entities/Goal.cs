@@ -11,4 +11,7 @@ public class Goal : BaseEntity
     
     public Guid BoardId { get; set; }
     public Board? Board { get; set; }
+    
+    public Guid PaymentId { get; set; }
+    public ICollection<Payment> Payments { get; set; } = new List<Payment>();
 }
