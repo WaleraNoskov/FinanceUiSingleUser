@@ -4,11 +4,12 @@ using FinanceUi.Core.Dtos;
 using FinanceUi.Core.Dtos.Board;
 using FinanceUi.Core.Entities;
 using FinanceUi.Core.Repositories;
+using FinanceUi.Core.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceUi.Infrastructure.Repositories;
 
-public class BoardRepository(AppDbContext dbContext) : IBoardRepository
+public class BoardRepository(AppDbContext dbContext, IObjectMapper mapper) : IBoardRepository
 {
     public async Task<PaginationResult<BoardDto>> GetAllAsync(GetAllBoardsDto dto)
     {
@@ -25,14 +26,7 @@ public class BoardRepository(AppDbContext dbContext) : IBoardRepository
             .Take(dto.PaginationParams.PageSize);
 
         var items = await paginated
-            .Select(b => new BoardDto
-            {
-                Id = b.Id,
-                Title = b.Title,
-                IncomesCount = b.Incomes.Count,
-                PaymentsCount = b.Payments.Count,
-                GoalsCount = b.Goals.Count
-            })
+            .Select(b => mapper.Map<Board, BoardDto>(b))
             .ToListAsync();
 
         var count = await filtered.CountAsync();
@@ -42,21 +36,14 @@ public class BoardRepository(AppDbContext dbContext) : IBoardRepository
 
     public async Task<BoardDto?> GetByIdAsync(Guid id)
     {
-        return await dbContext.Boards
-            .Select(b => new BoardDto()
-            {
-                Id = b.Id,
-                Title = b.Title,
-                IncomesCount = b.Incomes.Count,
-                PaymentsCount = b.Payments.Count,
-                GoalsCount = b.Goals.Count
-            })
-            .FirstOrDefaultAsync(b => b.Id == id);
-    }
+        var board = await dbContext.Boards.FirstOrDefaultAsync(b => b.Id == id);
+
+        return board is not null ? mapper.Map<Board, BoardDto>(board) : null;
+	}
 
     public async Task<Guid> CreateBoard(BriefBoardDto dto)
     {
-        var board = new Board { Title = dto.Title };
+        var board = mapper.Map<BriefBoardDto, Board>(dto);
         await dbContext.AddAsync(board);
         await dbContext.SaveChangesAsync();
         

@@ -3,11 +3,12 @@ using FinanceUi.Core.Dtos;
 using FinanceUi.Core.Dtos.Income;
 using FinanceUi.Core.Entities;
 using FinanceUi.Core.Repositories;
+using FinanceUi.Core.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceUi.Infrastructure.Repositories;
 
-public class IncomeRepository(AppDbContext dbContext) : IIncomeRepository
+public class IncomeRepository(AppDbContext dbContext, IObjectMapper mapper) : IIncomeRepository
 {
     public async Task<PaginationResult<IncomeDto>> GetAllAsync(GetAllIncomesDto dto)
     {
@@ -25,16 +26,7 @@ public class IncomeRepository(AppDbContext dbContext) : IIncomeRepository
             .Take(dto.PaginationParams.PageSize);
 
         var items = await paginated
-            .Select(i => new IncomeDto
-            {
-                Id = i.Id,
-                Name = i.Name,
-                Amount = i.Amount,
-                Date = i.Date,
-                Periodicity = i.Periodicity,
-                BoardId = i.BoardId,
-                BoardTitle = i.Board.Title
-            })
+            .Select(i => mapper.Map<Income, IncomeDto>(i))
             .ToListAsync();
 
         var count = await query.CountAsync();
@@ -44,30 +36,13 @@ public class IncomeRepository(AppDbContext dbContext) : IIncomeRepository
 
     public async Task<IncomeDto?> GetByIdAsync(Guid id)
     {
-        return await dbContext.Incomes
-            .Select(i => new IncomeDto
-            {
-                Id = i.Id,
-                Name = i.Name,
-                Amount = i.Amount,
-                Date = i.Date,
-                Periodicity = i.Periodicity,
-                BoardId = i.BoardId,
-                BoardTitle = i.Board.Title
-            })
-            .FirstOrDefaultAsync(i => i.Id == id);
-    }
+        var income = await dbContext.Incomes.FirstOrDefaultAsync(i => i.Id == id);
+        return income is not null ? mapper.Map<Income, IncomeDto>(income) : null;
+	}
 
     public async Task<Guid> CreateAsync(BriefIncomeDto dto)
     {
-        var income = new Income
-        {
-            Name = dto.Name,
-            Amount = dto.Amount,
-            Date = dto.Date,
-            Periodicity = dto.Periodicity,
-            BoardId = dto.BoardId
-        };
+        var income = mapper.Map<BriefIncomeDto, Income>(dto);
 
         await dbContext.AddAsync(income);
         await dbContext.SaveChangesAsync();

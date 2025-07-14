@@ -31,7 +31,7 @@ public class GetBoardTests
         );
         await context.SaveChangesAsync();
 
-        var service = new BoardRepository(context);
+        var service = new BoardRepository(context, DependencyInjection.GetMapper());
 
         var dto = new GetAllBoardsDto
         {
@@ -57,7 +57,7 @@ public class GetBoardTests
             context.Boards.Add(new Board { Title = $"Board {i}" });
 
         await context.SaveChangesAsync();
-        var service = new BoardRepository(context);
+        var service = new BoardRepository(context, DependencyInjection.GetMapper());
 
         var dto = new GetAllBoardsDto
         {
@@ -103,7 +103,7 @@ public class GetBoardTests
 
         await context.SaveChangesAsync();
 
-        var service = new BoardRepository(context); // или твой сервис, который вызывает GetAllAsync
+        var service = new BoardRepository(context, DependencyInjection.GetMapper()); // или твой сервис, который вызывает GetAllAsync
 
         var dto = new GetAllBoardsDto
         {
@@ -170,7 +170,7 @@ public class GetBoardTests
         context.Goals.AddRange(goals);
         await context.SaveChangesAsync();
 
-        var service = new BoardRepository(context);
+        var service = new BoardRepository(context, DependencyInjection.GetMapper());
 
         var result = await service.GetByIdAsync(board.Id);
 

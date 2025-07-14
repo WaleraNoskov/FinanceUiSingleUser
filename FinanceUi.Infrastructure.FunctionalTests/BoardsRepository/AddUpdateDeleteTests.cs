@@ -21,7 +21,7 @@ public class AddUpdateDeleteTests
     public async Task CreateBoard_CreatesBoardSuccessfully()
     {
         var context = GetContext();
-        var service = new BoardRepository(context);
+        var service = new BoardRepository(context, DependencyInjection.GetMapper());
 
         var dto = new BriefBoardDto { Title = "New Board" };
         var id = await service.CreateBoard(dto);
@@ -39,7 +39,7 @@ public class AddUpdateDeleteTests
         context.Boards.Add(board);
         await context.SaveChangesAsync();
 
-        var service = new BoardRepository(context);
+        var service = new BoardRepository(context, DependencyInjection.GetMapper());
         await service.UpdateBoard(new BriefBoardDto { Id = board.Id, Title = "Updated Title" });
 
         var updated = await context.Boards.FindAsync(board.Id);
@@ -54,7 +54,7 @@ public class AddUpdateDeleteTests
         context.Boards.Add(board);
         await context.SaveChangesAsync();
 
-        var service = new BoardRepository(context);
+        var service = new BoardRepository(context, DependencyInjection.GetMapper());
         await service.DeleteBoard(board.Id);
 
         var deleted = await context.Boards.FindAsync(board.Id);

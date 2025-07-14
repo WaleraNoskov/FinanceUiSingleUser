@@ -4,11 +4,12 @@ using FinanceUi.Core.Dtos.Board;
 using FinanceUi.Core.Dtos.Goal;
 using FinanceUi.Core.Entities;
 using FinanceUi.Core.Repositories;
+using FinanceUi.Core.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceUi.Infrastructure.Repositories;
 
-public class GoalRepository(AppDbContext dbContext) : IGoalRepository
+public class GoalRepository(AppDbContext dbContext, IObjectMapper mapper) : IGoalRepository
 {
     public async Task<PaginationResult<GoalDto>> GetAllAsync(GetAllGoalsDto dto)
     {
@@ -25,17 +26,7 @@ public class GoalRepository(AppDbContext dbContext) : IGoalRepository
             .Take(dto.PaginationParams.PageSize);
 
         var items = await paginated
-            .Select(g => new GoalDto
-            {
-                Id = g.Id,
-                Title = g.Title,
-                Amount = g.Amount,
-                PaidAmount = g.PaidAmount,
-                Deadline = g.Deadline,
-                BoardId = g.BoardId,
-                BoardName = g.Board.Title,
-                PaymentsCount = g.Payments.Count,
-            })
+            .Select(g => mapper.Map<Goal, GoalDto>(g))
             .ToListAsync();
 
         var count = await filtered.CountAsync();
@@ -45,31 +36,14 @@ public class GoalRepository(AppDbContext dbContext) : IGoalRepository
 
     public async Task<GoalDto?> GetByIdAsync(Guid id)
     {
-        return await dbContext.Goals
-            .Select(g => new GoalDto()
-            {
-                Id = g.Id,
-                Title = g.Title,
-                Amount = g.Amount,
-                PaidAmount = g.PaidAmount,
-                Deadline = g.Deadline,
-                BoardId = g.BoardId,
-                BoardName = g.Board.Title,
-                PaymentsCount = g.Payments.Count,
-            })
-            .FirstOrDefaultAsync(b => b.Id == id);
-    }
+        var goal = await dbContext.Goals.FirstOrDefaultAsync(b => b.Id == id);
+        return goal is not null ? mapper.Map<Goal, GoalDto>(goal) : null;
+
+	}
 
     public async Task<Guid> CreateAsync(BriefGoalDto dto)
     {
-        var goal = new Goal
-        {
-            Title = dto.Title,
-            Amount = dto.Amount,
-            PaidAmount = dto.PaidAmount,
-            Deadline = dto.Deadline,
-            BoardId = dto.BoardId,
-        };
+        var goal = mapper.Map<BriefGoalDto, Goal>(dto);
         await dbContext.AddAsync(goal);
         await dbContext.SaveChangesAsync();
         

@@ -25,7 +25,7 @@ public class IncomeRepositoryTests
         context.Boards.Add(board);
         await context.SaveChangesAsync();
 
-        var repo = new IncomeRepository(context);
+        var repo = new IncomeRepository(context, DependencyInjection.GetMapper());
         var dto = new BriefIncomeDto
         {
             Name = "Salary",
@@ -59,7 +59,7 @@ public class IncomeRepositoryTests
         context.Incomes.AddRange(incomes);
         await context.SaveChangesAsync();
 
-        var repo = new IncomeRepository(context);
+        var repo = new IncomeRepository(context, DependencyInjection.GetMapper());
         var dto = new GetAllIncomesDto
         {
             Filter = "a",
@@ -92,7 +92,7 @@ public class IncomeRepositoryTests
         context.Add(income);
         await context.SaveChangesAsync();
 
-        var repo = new IncomeRepository(context);
+        var repo = new IncomeRepository(context, DependencyInjection.GetMapper());
         var dto = await repo.GetByIdAsync(income.Id);
 
         Assert.NotNull(dto);
@@ -120,7 +120,7 @@ public class IncomeRepositoryTests
         context.Add(income);
         await context.SaveChangesAsync();
 
-        var repo = new IncomeRepository(context);
+        var repo = new IncomeRepository(context, DependencyInjection.GetMapper());
         var result = await repo.UpdateAsync(new BriefIncomeDto
         {
             Id = income.Id,
@@ -154,7 +154,7 @@ public class IncomeRepositoryTests
         context.Add(income);
         await context.SaveChangesAsync();
 
-        var repo = new IncomeRepository(context);
+        var repo = new IncomeRepository(context, DependencyInjection.GetMapper());
         await repo.DeleteAsync(income.Id);
 
         var found = await context.Incomes.FindAsync(income.Id);

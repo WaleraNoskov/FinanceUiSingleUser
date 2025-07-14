@@ -31,7 +31,7 @@ public class GoalsRepositoryTests
         );
         await context.SaveChangesAsync();
 
-        var repo = new GoalRepository(context);
+        var repo = new GoalRepository(context, DependencyInjection.GetMapper());
         var dto = new GetAllGoalsDto
         {
             Title = "save", // filter
@@ -56,7 +56,7 @@ public class GoalsRepositoryTests
         context.Payments.Add(new Payment { Name = "Name", Goal = goal });
         await context.SaveChangesAsync();
 
-        var repo = new GoalRepository(context);
+        var repo = new GoalRepository(context, DependencyInjection.GetMapper());
         var result = await repo.GetByIdAsync(goal.Id);
 
         Assert.NotNull(result);
@@ -73,7 +73,7 @@ public class GoalsRepositoryTests
         context.Boards.Add(board);
         await context.SaveChangesAsync();
 
-        var repo = new GoalRepository(context);
+        var repo = new GoalRepository(context, DependencyInjection.GetMapper());
         var dto = new BriefGoalDto
         {
             Title = "New Goal",
@@ -102,7 +102,7 @@ public class GoalsRepositoryTests
         context.Goals.Add(goal);
         await context.SaveChangesAsync();
 
-        var repo = new GoalRepository(context);
+        var repo = new GoalRepository(context, DependencyInjection.GetMapper());
         var dto = new BriefGoalDto
         {
             Id = goal.Id,
@@ -130,7 +130,7 @@ public class GoalsRepositoryTests
         context.Goals.Add(goal);
         await context.SaveChangesAsync();
 
-        var repo = new GoalRepository(context);
+        var repo = new GoalRepository(context, DependencyInjection.GetMapper());
         await repo.DeleteAsync(goal.Id);
 
         var deleted = await context.Goals.FindAsync(goal.Id);

@@ -17,7 +17,7 @@ public class PaymentsRepositoryTests
     }
 
     private PaymentRepository CreateRepository(AppDbContext context) =>
-        new PaymentRepository(context);
+        new PaymentRepository(context, DependencyInjection.GetMapper());
 
     [Fact]
     public async Task CreateAsync_AddsPayment()

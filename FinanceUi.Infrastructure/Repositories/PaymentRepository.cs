@@ -2,20 +2,16 @@
 using FinanceUi.Core.Dtos;
 using FinanceUi.Core.Entities;
 using FinanceUi.Core.Repositories;
+using FinanceUi.Core.Services;
+using FinanceUi.Infrastructure.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceUi.Infrastructure.Repositories;
 
-public class PaymentRepository : IPaymentRepository
+public class PaymentRepository(AppDbContext dbContext, IObjectMapper mapper) : IPaymentRepository
 {
-    private readonly AppDbContext dbContext;
 
-    public PaymentRepository(AppDbContext dbContext)
-    {
-        this.dbContext = dbContext;
-    }
-
-    public async Task<PaginationResult<PaymentDto>> GetAllAsync(GetAllPaymentsDto dto)
+	public async Task<PaginationResult<PaymentDto>> GetAllAsync(GetAllPaymentsDto dto)
     {
         var query = dbContext.Payments.AsQueryable();
 
@@ -31,17 +27,7 @@ public class PaymentRepository : IPaymentRepository
             .Take(dto.PaginationParams.PageSize);
 
         var items = await paginated
-            .Select(p => new PaymentDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Amount = p.Amount,
-                Periodicity = p.Periodicity,
-                BoardId = p.BoardId,
-                BoardTitle = p.Board.Title,
-                GoalId = p.GoalId,
-                GoalTitle = p.Goal != null ? p.Goal.Title : null
-            })
+            .Select(p => mapper.Map<Payment, PaymentDto>(p))
             .ToListAsync();
 
         var count = await query.CountAsync();
@@ -51,31 +37,14 @@ public class PaymentRepository : IPaymentRepository
 
     public async Task<PaymentDto?> GetByIdAsync(Guid id)
     {
-        return await dbContext.Payments
-            .Select(p => new PaymentDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Amount = p.Amount,
-                Periodicity = p.Periodicity,
-                BoardId = p.BoardId,
-                BoardTitle = p.Board.Title,
-                GoalId = p.GoalId,
-                GoalTitle = p.Goal != null ? p.Goal.Title : null
-            })
-            .FirstOrDefaultAsync(p => p.Id == id);
-    }
+        var payment = await dbContext.Payments.FirstOrDefaultAsync(p => p.Id == id);
+        return payment is not null ? mapper.Map<Payment, PaymentDto>(payment) : null;
+
+	}
 
     public async Task<Guid> CreateAsync(BriefPaymentDto dto)
     {
-        var payment = new Payment
-        {
-            Name = dto.Name,
-            Amount = dto.Amount,
-            Periodicity = dto.Periodicity,
-            BoardId = dto.BoardId,
-            GoalId = dto.GoalId
-        };
+        var payment = mapper.Map<BriefPaymentDto, Payment>(dto);
 
         await dbContext.Payments.AddAsync(payment);
         await dbContext.SaveChangesAsync();
