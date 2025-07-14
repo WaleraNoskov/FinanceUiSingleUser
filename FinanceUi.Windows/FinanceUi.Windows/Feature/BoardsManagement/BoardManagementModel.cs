@@ -13,68 +13,81 @@ namespace FinanceUi.Windows.Feature.Boards;
 
 public class BoardManagementModel : ObservableObject
 {
-	private readonly IBoardService _boardService;
+    private readonly IBoardService _boardService;
 
-	private ObservableCollection<BoardDto> _boards;
-	public ReadOnlyObservableCollection<BoardDto> Boards => new ReadOnlyObservableCollection<BoardDto>(_boards);
+    private ObservableCollection<BoardDto> _boards;
+    public ReadOnlyObservableCollection<BoardDto> Boards => new ReadOnlyObservableCollection<BoardDto>(_boards);
 
-	private readonly GetAllBoardsDto _getAllDto;
-	public GetAllBoardsDto GetAllBoardsDto => _getAllDto;
+    private readonly GetAllBoardsDto _getAllDto;
+    public GetAllBoardsDto GetAllBoardsDto => _getAllDto;
 
-	private bool _isLoading;
-	public bool IsLoading
-	{
-		get => _isLoading;
-		private set => SetField(ref _isLoading, value);
-	}
+    private bool _isLoading;
+    public bool IsLoading
+    {
+        get => _isLoading;
+        private set => SetField(ref _isLoading, value);
+    }
 
-	public BoardManagementModel(IBoardService boardService)
-	{
-		_boardService = boardService;
+    public BoardManagementModel(IBoardService boardService)
+    {
+        _boardService = boardService;
 
-		_boards = new ObservableCollection<BoardDto>();
+        _boards = new ObservableCollection<BoardDto>();
 
-		_getAllDto = new GetAllBoardsDto();
-	}
+        _getAllDto = new GetAllBoardsDto
+        {
+            PaginationParams = new Core.Contracts.PaginationParams()
+            {
+                Page = 0,
+                PageSize = 10
+            },
+            SortingParams = new Core.Contracts.SortingParams()
+            {
+                PropertyName = "Title",
+                IsDescending = false
+            },
+            Filter = string.Empty
+        };
+    }
 
-	public async Task RestoreAsync()
-	{
-		IsLoading = true;
+    public async Task RestoreAsync()
+    {
+        IsLoading = true;
 
-		try
-		{
-			var result = await _boardService.GetAllAsync(_getAllDto);
-			_boards.Clear();
-			foreach (var board in result.Items)
-				_boards.Add(board);
-		}
-		catch (Exception ex)
-		{
-		}
-		IsLoading = false;
-	}
+        try
+        {
+            var result = await _boardService.GetAllAsync(_getAllDto);
+            _boards.Clear();
+            foreach (var board in result.Items)
+                _boards.Add(board);
+        }
+        catch (Exception ex)
+        {
+        }
+        IsLoading = false;
+    }
 
-	public async Task CreateBoard(BriefBoardDto board)
-	{
-		IsLoading = true;
+    public async Task CreateBoard(BriefBoardDto board)
+    {
+        IsLoading = true;
 
-		await _boardService.CreateBoard(board);
-		await RestoreAsync();
-	}
+        await _boardService.CreateBoard(board);
+        await RestoreAsync();
+    }
 
-	public async Task UpdateBoard(BriefBoardDto board)
-	{
-		IsLoading = true;
+    public async Task UpdateBoard(BriefBoardDto board)
+    {
+        IsLoading = true;
 
-		await _boardService.UpdateBoard(board);
-		await RestoreAsync();
-	}
+        await _boardService.UpdateBoard(board);
+        await RestoreAsync();
+    }
 
-	public async Task DeleteBoardAsync(Guid id)
-	{
-		IsLoading = true;
+    public async Task DeleteBoardAsync(Guid id)
+    {
+        IsLoading = true;
 
-		await _boardService.DeleteBoard(id);
-		await RestoreAsync();
-	}
+        await _boardService.DeleteBoard(id);
+        await RestoreAsync();
+    }
 }

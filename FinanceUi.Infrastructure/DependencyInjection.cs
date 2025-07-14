@@ -25,16 +25,11 @@ public static class DependencyInjection
 			.AddSingleton<IObjectMapper>(GetMapper());
     }
     
-    private static IServiceCollection AddAppSqlite(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddAppSqlite(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Default");
-        if (string.IsNullOrWhiteSpace(connectionString))
-            throw new InvalidOperationException("Connection string 'Default' is not configured.");
-
+        var dbPath = configuration["Database:Path"] ?? "default.db";
         services.AddDbContext<AppDbContext>(options =>
-        {
-            options.UseSqlite(connectionString);
-        });
+            options.UseSqlite($"Data Source={dbPath}"));
 
         return services;
     }

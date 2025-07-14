@@ -29,7 +29,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\FinanceUi.Application\FinanceUi.Application.csproj" />
     <ProjectReference Include="..\..\FinanceUi.Core\FinanceUi.Core.csproj" />
+    <ProjectReference Include="..\..\FinanceUi.Infrastructure\FinanceUi.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

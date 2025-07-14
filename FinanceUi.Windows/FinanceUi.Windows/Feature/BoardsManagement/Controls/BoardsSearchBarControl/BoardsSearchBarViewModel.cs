@@ -22,8 +22,9 @@ internal class BoardsSearchBarViewModel : ObservableObject
 	}
 
 	public GetAllBoardsDto GetAllBoardsDto => _model.GetAllBoardsDto;
+	public bool IsLoading => _model.IsLoading;
 
-	public ICommand RestoreCommand { get; set; }
+	public AsyncRelayCommand RestoreCommand { get; set; }
 	private async Task OnRestoreCommandExecuted()
 	{
 		await _model.RestoreAsync();
