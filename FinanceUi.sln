@@ -15,6 +15,8 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "FinanceUi.Windows (Package)
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceUi.Windows", "FinanceUi.Windows\FinanceUi.Windows\FinanceUi.Windows.csproj", "{CD5DEDFA-8BA7-40BA-8102-2DE5D3CC0411}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceUi.Windows.FunctionalTests", "FinanceUi.Windows.FunctionalTests\FinanceUi.Windows.FunctionalTests.csproj", "{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,22 @@ Global
 		{CD5DEDFA-8BA7-40BA-8102-2DE5D3CC0411}.Release|x64.Build.0 = Release|x64
 		{CD5DEDFA-8BA7-40BA-8102-2DE5D3CC0411}.Release|x86.ActiveCfg = Release|x86
 		{CD5DEDFA-8BA7-40BA-8102-2DE5D3CC0411}.Release|x86.Build.0 = Release|x86
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|x64.Build.0 = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Debug|x86.Build.0 = Debug|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|ARM64.Build.0 = Release|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|x64.ActiveCfg = Release|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|x64.Build.0 = Release|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|x86.ActiveCfg = Release|Any CPU
+		{AD84F55C-57E8-47FD-91D1-23D08D0F6E3F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
