@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -27,14 +29,24 @@ namespace FinanceUi.Windows
     public partial class App : Application
     {
         private Window? _window;
+		private IHost _host;
 
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App()
+		/// <summary>
+		/// Initializes the singleton application object.  This is the first line of authored code
+		/// executed, and as such is the logical equivalent of main() or WinMain().
+		/// </summary>
+		public App()
         {
-            InitializeComponent();
+			InitializeComponent();
+
+			var builder = Host.CreateApplicationBuilder();
+			builder.Services.AddSingleton<MainWindow>();
+
+			IHost host = builder.Build();
+			//host.Run();
+
+            _host = host;
+
         }
 
         /// <summary>
@@ -43,7 +55,7 @@ namespace FinanceUi.Windows
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _window = new MainWindow();
+            _window = _host.Services.GetRequiredService<MainWindow>();
             _window.Activate();
         }
     }
