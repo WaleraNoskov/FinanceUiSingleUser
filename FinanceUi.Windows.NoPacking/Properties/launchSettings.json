@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FinanceUi.Windows.NoPacking (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FinanceUi.Windows.NoPacking (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
