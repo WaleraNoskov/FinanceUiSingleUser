@@ -34,9 +34,8 @@ public static class DependencyInjection
 		{
 			Id = b.Id,
 			Title = b.Title,
-			IncomesCount = b.Incomes?.Count ?? 0,
-			GoalsCount = b.Goals?.Count ?? 0,
-			PaymentsCount = b.Payments?.Count ?? 0
+			PaidTotalGoal = b.Goals?.Sum(g => g.PaidAmount) ?? 0,
+			TotalGoal = b.Goals?.Sum(g => g.Amount) ?? 0
 		});
 		mapper.Register<BoardDto, Board>(dto => new Board
 		{

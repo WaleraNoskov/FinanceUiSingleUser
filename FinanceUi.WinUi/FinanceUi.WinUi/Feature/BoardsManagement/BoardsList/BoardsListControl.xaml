@@ -7,41 +7,91 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FinanceUi.WinUi.Feature.BoardsManagement.BoardsList"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
     d:DataContext="{d:DesignInstance local:BoardsListViewModel}"
     mc:Ignorable="d">
 
-    <UserControl.Resources>
-        <Style x:Key="SubtitlePanel" TargetType="StackPanel">
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="Spacing" Value="4" />
-        </Style>
-        <Style x:Key="Subtitle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="FontWeight" Value="Light" />
-        </Style>
-    </UserControl.Resources>
+    <!--<GridView 
+        ItemsSource="{Binding Boards}"
+        SelectionMode="None">
 
-    <ListView ItemsSource="{Binding Boards}">
+        <GridView.ItemTemplate>
+            <DataTemplate x:DataType="board:BoardDto">
+                <StackPanel
+                    Spacing="12"
+                    CornerRadius="8"
+                    Padding="16"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    </Grid>
+                    
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="4">
+                        <TextBlock Text="Накоплено:" Style="{StaticResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind PaidTotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="из" Style="{StaticResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind TotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <SplitButton Content="Выбрать">
+                        <SplitButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Редактировать" Icon="Edit"/>
+                                <MenuFlyoutItem Text="Удалить" Icon="Delete"/>
+                            </MenuFlyout>
+                        </SplitButton.Flyout>
+                    </SplitButton>
+                </StackPanel>
+            </DataTemplate>
+        </GridView.ItemTemplate>
+    </GridView>-->
+
+    <ListView SelectionMode="None" ItemsSource="{Binding Boards}">
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="board:BoardDto">
-                <StackPanel>
-                    <TextBlock Text="{x:Bind Title}" />
-                    <StackPanel Orientation="Horizontal" Spacing="8">
-                        <StackPanel Style="{StaticResource SubtitlePanel}">
-                            <TextBlock Style="{StaticResource Subtitle}">Доходов:</TextBlock>
-                            <TextBlock Style="{StaticResource Subtitle}" Text="{x:Bind IncomesCount}" />
-                        </StackPanel>
-                        <StackPanel Style="{StaticResource SubtitlePanel}">
-                            <TextBlock Style="{StaticResource Subtitle}">Расходов:</TextBlock>
-                            <TextBlock Style="{StaticResource Subtitle}" Text="{x:Bind PaymentsCount}" />
-                        </StackPanel>
-                        <StackPanel Style="{StaticResource SubtitlePanel}">
-                            <TextBlock Style="{StaticResource Subtitle}">Целей:</TextBlock>
-                            <TextBlock Style="{StaticResource Subtitle}" Text="{x:Bind GoalsCount}" />
+                <Grid
+                    Margin="0 4"
+                    CornerRadius="8"
+                    Padding="16"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}" />
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="4">
+                            <TextBlock Text="Накоплено:" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{x:Bind PaidTotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="из" Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{x:Bind TotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
                         </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+                    <SplitButton Content="Выбрать" Grid.Column="1">
+                        <SplitButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Редактировать" Icon="Edit"/>
+                                <MenuFlyoutItem Text="Удалить" Icon="Delete"/>
+                            </MenuFlyout>
+                        </SplitButton.Flyout>
+                    </SplitButton>
+                </Grid>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+
 </UserControl>
