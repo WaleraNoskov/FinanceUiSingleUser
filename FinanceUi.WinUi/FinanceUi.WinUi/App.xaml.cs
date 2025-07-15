@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using FinanceUi.Application;
 using FinanceUi.Core.Repositories;
 using FinanceUi.Infrastructure;
+using FinanceUi.WinUi.Feature.BoardsManagement;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -58,8 +59,7 @@ namespace FinanceUi.WinUi
 			builder.Services.AddSqlite<AppDbContext>(resolvedConnectionString, opt => { });
 			builder.Services.AddInfrastructureServices();
 			builder.Services.AddApplicationServices();
-
-			builder.Services.AddSingleton<MainWindow>();
+			builder.Services.AddWinUiServices();
 
 			IHost host = builder.Build();
 			_host = host;
@@ -71,11 +71,12 @@ namespace FinanceUi.WinUi
 		/// <param name="args">Details about the launch request and process.</param>
 		protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
 		{
-			_window = _host.Services.GetRequiredService<MainWindow>();
-			_window.Activate();
+			var page = _host.Services.GetRequiredService<BoardsManagementPageView>();
+			page.DataContext = _host.Services.GetRequiredService<BoardsManagementPageViewModel>();
 
-			var repo = _host.Services.GetRequiredService<IBoardRepository>();
-			repo.GetByIdAsync(Guid.Empty).Wait();
+			_window = _host.Services.GetRequiredService<MainWindow>();
+			_window.Content = page;
+			_window.Activate();
 		}
 	}
 }

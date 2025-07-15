@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace FinanceUi.WinUi.Feature.Shared;
 
 /// <summary> Base View Model </summary>
-public class ObservableObject : INotifyPropertyChanged, IDisposable
+public class DisposableObservableObject : INotifyPropertyChanged, IDisposable
 {
     #region INotifyPropertyChanged
 
@@ -72,7 +72,7 @@ public class ObservableObject : INotifyPropertyChanged, IDisposable
         _disposed = true;
     }
 
-    ~ObservableObject()
+    ~DisposableObservableObject()
     {
         Dispose(false);
     }

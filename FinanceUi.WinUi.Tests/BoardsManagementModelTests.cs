@@ -10,8 +10,8 @@ public class BoardsManagementModelTests
 {
     private readonly Mock<IBoardService> _boardServiceMock = new();
 
-    private BoardManagementModel CreateModel() =>
-        new BoardManagementModel(_boardServiceMock.Object);
+    private BoardsManagementModel CreateModel() =>
+        new BoardsManagementModel(_boardServiceMock.Object);
 
     [Fact]
     public async Task RestoreAsync_LoadsBoardsIntoCollection()

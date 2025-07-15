@@ -8,7 +8,7 @@ using FinanceUi.WinUi.Feature.Shared;
 
 namespace FinanceUi.WinUi.Feature.BoardsManagement;
 
-public class BoardManagementModel : ObservableObject
+public class BoardsManagementModel : DisposableObservableObject
 {
     private readonly IBoardService _boardService;
 
@@ -22,15 +22,23 @@ public class BoardManagementModel : ObservableObject
     public bool IsLoading
     {
         get => _isLoading;
-        set => SetField(ref _isLoading, value); // от ObservableObject
+        private set => SetField(ref _isLoading, value); // от DisposableObservableObject
     }
 
-    public BoardManagementModel(IBoardService boardService)
+    public BoardsManagementModel(IBoardService boardService)
     {
         _boardService = boardService;
 
         _boards = new ObservableCollection<BoardDto>();
-        _getAllDto = new GetAllBoardsDto();
+        _getAllDto = new GetAllBoardsDto
+        {
+            Filter = string.Empty,
+            PaginationParams = new Core.Contracts.PaginationParams(),
+            SortingParams = new Core.Contracts.SortingParams()
+            {
+                PropertyName = "Title"
+            }
+        };
     }
 
     public async Task RestoreAsync()
