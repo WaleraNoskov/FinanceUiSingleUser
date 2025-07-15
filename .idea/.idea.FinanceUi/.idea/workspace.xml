@@ -7,6 +7,13 @@
     <projectFile kind="Uwp">FinanceUi.Client/FinanceUi.Client.csproj</projectFile>
     <projectFile kind="XamarinIOS">FinanceUi.Client/FinanceUi.Client.csproj</projectFile>
     <projectFile kind="XamarinMacOS">FinanceUi.Client/FinanceUi.Client.csproj</projectFile>
+    <projectFile kind="Uwp">FinanceUi.Maui/FinanceUi.Maui.csproj</projectFile>
+    <projectFile kind="XamarinIOS">FinanceUi.Maui/FinanceUi.Maui.csproj</projectFile>
+    <projectFile kind="XamarinMacOS">FinanceUi.Maui/FinanceUi.Maui.csproj</projectFile>
+    <projectFile>FinanceUi.Migrator/FinanceUi.Migrator.csproj</projectFile>
+    <projectFile pubXmlPath="FinanceUi.Windows/FinanceUi.Windows/Properties/PublishProfiles/win-arm64.pubxml">FinanceUi.Windows/FinanceUi.Windows/FinanceUi.Windows.csproj</projectFile>
+    <projectFile pubXmlPath="FinanceUi.Windows/FinanceUi.Windows/Properties/PublishProfiles/win-x64.pubxml">FinanceUi.Windows/FinanceUi.Windows/FinanceUi.Windows.csproj</projectFile>
+    <projectFile pubXmlPath="FinanceUi.Windows/FinanceUi.Windows/Properties/PublishProfiles/win-x86.pubxml">FinanceUi.Windows/FinanceUi.Windows/FinanceUi.Windows.csproj</projectFile>
     <projectFile>FinanceUi/FinanceUi.csproj</projectFile>
   </component>
   <component name="AutoImportSettings">
@@ -14,42 +21,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aabdaced-72ed-4c92-a631-325788b0f634" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/App.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/App.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/AppShell.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/AppShell.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/FinanceUi.Client.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/MainPage.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/MainPage.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/MauiProgram.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Android/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Android/MainActivity.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Android/MainApplication.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Android/Resources/values/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/MacCatalyst/AppDelegate.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/MacCatalyst/Entitlements.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/MacCatalyst/Info.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/MacCatalyst/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Tizen/Main.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Tizen/tizen-manifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Windows/App.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Windows/App.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Windows/Package.appxmanifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/Windows/app.manifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/iOS/AppDelegate.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/iOS/Info.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/iOS/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Platforms/iOS/Resources/PrivacyInfo.xcprivacy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/AppIcon/appicon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/AppIcon/appiconfg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/Fonts/OpenSans-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/Fonts/OpenSans-Semibold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/Images/dotnet_bot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/Raw/AboutAssets.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/Splash/splash.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/Styles/Colors.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceUi.Client/Resources/Styles/Styles.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FinanceUi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FinanceUi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows.FunctionalTests/BoardManagementModelTests.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows.FunctionalTests/FinanceUi.Windows.FunctionalTests.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/FinanceUi.Windows (Package).assets.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/FinanceUi.Windows (Package).wapproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/FinanceUi.Windows (Package).wapproj.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Images/LockScreenLogo.scale-200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Images/SplashScreen.scale-200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Images/Square150x150Logo.scale-200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Images/Square44x44Logo.scale-200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Images/Square44x44Logo.targetsize-24_altform-unplated.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Images/StoreLogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Images/Wide310x150Logo.scale-200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows (Package)/Package.appxmanifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/App.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/App.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/DependencyInjection.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/BoardsManagement/BoardManagementModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/BoardsManagement/Controls/BoardsSearchBarControl/BoardsSearchBarView.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/BoardsManagement/Controls/BoardsSearchBarControl/BoardsSearchBarView.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/BoardsManagement/Controls/BoardsSearchBarControl/BoardsSearchBarViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/BoardsManagement/Pages/BoardsManagementPage/BoardsManagementPage.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/BoardsManagement/Pages/BoardsManagementPage/BoardsManagementPage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/BoardsManagement/Pages/BoardsManagementPage/BoardsManagementViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/Shared/Converters/InvertedBoolConverter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Feature/Shared/ObservableObject.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/FinanceUi.Windows.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/FinanceUi.Windows.csproj.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/MainWindow.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/MainWindow.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Properties/PublishProfiles/win-arm64.pubxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Properties/PublishProfiles/win-x64.pubxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/Properties/PublishProfiles/win-x86.pubxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/app.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.Windows/FinanceUi.Windows/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceUi.sln" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceUi.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,28 +86,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "UWP.FinanceUi.App.executor": "Run",
-    "UWP.FinanceUi.Client.executor": "Run",
-    "e0da7297-7226-462d-8ce5-1704a45b5f47.executor": "Debug",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;UWP.FinanceUi.App.executor&quot;: &quot;Run&quot;,
+    &quot;UWP.FinanceUi.Client.executor&quot;: &quot;Run&quot;,
+    &quot;e0da7297-7226-462d-8ce5-1704a45b5f47.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="UWP.FinanceUi.Client">
     <configuration name="FinanceUi.Client" type="UwpProject" factoryName="UWP">
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/FinanceUi.Client/FinanceUi.Client.csproj" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="FinanceUi.Maui" type="UwpProject" factoryName="UWP">
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/FinanceUi.Maui/FinanceUi.Maui.csproj" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <method v="2">
         <option name="Build" />
@@ -114,8 +128,25 @@
       <option name="PLATFORM_TYPE" value="IOS" />
       <method v="2" />
     </configuration>
+    <configuration name="FinanceUi.Maui" type="XamarinIOSProject" factoryName="Xamarin.iOS">
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/FinanceUi.Maui/FinanceUi.Maui.csproj" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="IS_PASS_PARENT_ENVS" value="false" />
+      <option name="EXTRA_MLAUNCH_PARAMETERS" value="" />
+      <option name="PLATFORM_TYPE" value="IOS" />
+      <method v="2" />
+    </configuration>
     <configuration name="FinanceUi.Client" type="XamarinMacProject" factoryName="Xamarin.Mac">
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/FinanceUi.Client/FinanceUi.Client.csproj" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS_MAC" value="1" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="FinanceUi.Maui" type="XamarinMacProject" factoryName="Xamarin.Mac">
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/FinanceUi.Maui/FinanceUi.Maui.csproj" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="PASS_PARENT_ENVS_MAC" value="1" />
