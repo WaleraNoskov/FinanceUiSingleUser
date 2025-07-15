@@ -3,8 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceUi.Infrastructure;
 
-public class AppDbContext(DbContextOptions options) : DbContext(options)
+public class AppDbContext : DbContext
 {
+    public AppDbContext(DbContextOptions options) : base(options) 
+    {
+    }
+    
     public DbSet<Board> Boards { get; set; }
     public DbSet<Goal> Goals { get; set; }
     public DbSet<Income> Incomes { get; set; }

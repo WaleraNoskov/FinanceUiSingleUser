@@ -24,15 +24,6 @@ public static class DependencyInjection
             .AddScoped<IPaymentRepository, PaymentRepository>()
 			.AddSingleton<IObjectMapper>(GetMapper());
     }
-    
-    public static IServiceCollection AddAppSqlite(this IServiceCollection services, IConfiguration configuration)
-    {
-        var dbPath = configuration["Database:Path"] ?? "default.db";
-        services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlite($"Data Source={dbPath}"));
-
-        return services;
-    }
 
     public static ObjectMapper GetMapper()
     {
