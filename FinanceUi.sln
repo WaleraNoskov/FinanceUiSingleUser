@@ -17,6 +17,8 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "FinanceUi.WinUi (Package)",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceUi.WinUi", "FinanceUi.WinUi\FinanceUi.WinUi\FinanceUi.WinUi.csproj", "{870CBB8E-70D5-4CAC-B602-051D9B87C9B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceUi.WinUi.Tests", "FinanceUi.WinUi.Tests\FinanceUi.WinUi.Tests.csproj", "{13C193AB-E6A4-46AC-A770-7C7DAC53684B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,22 @@ Global
 		{870CBB8E-70D5-4CAC-B602-051D9B87C9B3}.Release|x64.Build.0 = Release|x64
 		{870CBB8E-70D5-4CAC-B602-051D9B87C9B3}.Release|x86.ActiveCfg = Release|x86
 		{870CBB8E-70D5-4CAC-B602-051D9B87C9B3}.Release|x86.Build.0 = Release|x86
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|x64.Build.0 = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Debug|x86.Build.0 = Debug|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|ARM64.Build.0 = Release|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|x64.ActiveCfg = Release|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|x64.Build.0 = Release|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|x86.ActiveCfg = Release|Any CPU
+		{13C193AB-E6A4-46AC-A770-7C7DAC53684B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
