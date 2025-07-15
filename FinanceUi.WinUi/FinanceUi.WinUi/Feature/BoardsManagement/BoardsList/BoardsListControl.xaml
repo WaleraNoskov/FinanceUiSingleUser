@@ -11,49 +11,6 @@
     d:DataContext="{d:DesignInstance local:BoardsListViewModel}"
     mc:Ignorable="d">
 
-    <!--<GridView 
-        ItemsSource="{Binding Boards}"
-        SelectionMode="None">
-
-        <GridView.ItemTemplate>
-            <DataTemplate x:DataType="board:BoardDto">
-                <StackPanel
-                    Spacing="12"
-                    CornerRadius="8"
-                    Padding="16"
-                    BorderThickness="1"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}" />
-                    </Grid>
-                    
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="4">
-                        <TextBlock Text="Накоплено:" Style="{StaticResource BodyTextBlockStyle}"/>
-                        <TextBlock Text="{x:Bind PaidTotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
-                        <TextBlock Text="из" Style="{StaticResource BodyTextBlockStyle}"/>
-                        <TextBlock Text="{x:Bind TotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
-                    </StackPanel>
-
-                    <SplitButton Content="Выбрать">
-                        <SplitButton.Flyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Text="Редактировать" Icon="Edit"/>
-                                <MenuFlyoutItem Text="Удалить" Icon="Delete"/>
-                            </MenuFlyout>
-                        </SplitButton.Flyout>
-                    </SplitButton>
-                </StackPanel>
-            </DataTemplate>
-        </GridView.ItemTemplate>
-    </GridView>-->
-
     <ListView SelectionMode="None" ItemsSource="{Binding Boards}">
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="board:BoardDto">
@@ -93,5 +50,6 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+
 
 </UserControl>

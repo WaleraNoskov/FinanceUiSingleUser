@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -23,9 +25,36 @@ namespace FinanceUi.WinUi.Feature.BoardsManagement
 	/// </summary>
 	public sealed partial class BoardsManagementPageView : Page
 	{
+        private BoardsManagementPageViewModel _viewModel;
+
 		public BoardsManagementPageView()
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void Page_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            _viewModel = (args.NewValue as BoardsManagementPageViewModel)!;
+        }
+
+        private async void AddBoardButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog();
+
+            var dataContext = _viewModel.AddBoardViewModel;
+
+            dialog.DataContext = dataContext;
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Style = Microsoft.UI.Xaml.Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            dialog.Title = "Добавить новую доску";
+            dialog.PrimaryButtonText = "Save";
+            dialog.PrimaryButtonCommand = dataContext.CreateCommand;
+            dialog.CloseButtonText = "Cancel";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = new AddOrEditBoardFormPage();
+
+            var result = await dialog.ShowAsync();
+
+        }
+    }
 }

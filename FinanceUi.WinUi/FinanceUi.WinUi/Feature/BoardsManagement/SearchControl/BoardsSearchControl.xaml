@@ -7,7 +7,8 @@
     xmlns:local="using:FinanceUi.WinUi.Feature.BoardsManagement.SearchControl"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DataContext="{d:DesignInstance local:BoardsSearchViewModel}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContextChanged="UserControl_DataContextChanged">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,21 +16,14 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <TextBox
-            Height="1"
-            PlaceholderText="Ищите по названию доски"
-            Text="{Binding GetAllBoardsDto.Filter}" 
-            Grid.Column="0"/>
+        <AutoSuggestBox 
+            Text="{Binding GetAllBoardsDto.Filter}"
+            PlaceholderText="Найти по имени"
+            TextChanged="AutoSuggestBox_TextChanged"
+            QueryIcon="Find"
+            QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+            SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
 
-        <Button
-            Command="{Binding SearchCommand}"
-            Style="{StaticResource AccentButtonStyle}"
-            Margin="4 0 0 0"
-            Grid.Column="1">
-            <StackPanel Orientation="Horizontal" Spacing="4">
-                <TextBlock Text="Искать" />
-                <SymbolIcon Symbol="Find"/>
-            </StackPanel>
-        </Button>
+        
     </Grid>
 </UserControl>

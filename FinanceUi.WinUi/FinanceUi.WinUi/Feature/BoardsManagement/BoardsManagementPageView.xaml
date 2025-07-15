@@ -9,17 +9,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:searchcontrol="using:FinanceUi.WinUi.Feature.BoardsManagement.SearchControl"
     d:DataContext="{d:DesignInstance local:BoardsManagementPageViewModel}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContextChanged="Page_DataContextChanged">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <searchcontrol:BoardsSearchControl Grid.Row="0" DataContext="{Binding BoardsSearchViewModel}" />
+        <searchcontrol:BoardsSearchControl Grid.Row="0" DataContext="{Binding BoardsSearchViewModel}" VerticalAlignment="Center" Margin="16 0 16 0"/>
+        
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Column="1">
+            <AppBarButton x:Name="AddBoardButton" Icon="Add" Label="Добавить" Click="AddBoardButton_Click"/>
+        </CommandBar>
 
-        <boardslist:BoardsListControl Grid.Row="1" DataContext="{Binding BoardsListViewModel}" />
+        <boardslist:BoardsListControl Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding BoardsListViewModel}" />
     </Grid>
 </Page>

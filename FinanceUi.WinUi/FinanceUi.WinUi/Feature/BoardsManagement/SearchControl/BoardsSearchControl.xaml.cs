@@ -18,11 +18,34 @@ using Windows.Foundation.Collections;
 
 namespace FinanceUi.WinUi.Feature.BoardsManagement.SearchControl
 {
-	public sealed partial class BoardsSearchControl : UserControl
-	{
-		public BoardsSearchControl()
-		{
-			InitializeComponent();
-		}
-	}
+    public sealed partial class BoardsSearchControl : UserControl
+    {
+        private BoardsSearchViewModel _viewModel;
+
+        public BoardsSearchControl()
+        {
+            InitializeComponent();
+        }
+
+        private void UserControl_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            _viewModel = (args.NewValue as BoardsSearchViewModel)!;
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+
+        }
+
+        private async void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (_viewModel.SearchCommand.CanExecute(null))
+                await _viewModel.SearchCommand.ExecuteAsync(null);
+        }
+
+        private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+
+        }
+    }
 }

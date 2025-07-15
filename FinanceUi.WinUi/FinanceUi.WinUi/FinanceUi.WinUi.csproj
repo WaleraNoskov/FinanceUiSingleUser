@@ -11,6 +11,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Feature\BoardsManagement\AddOrEditBoardForm\AddOrEditBoardFormPage.xaml" />
     <None Remove="Feature\BoardsManagement\BoardsManagementPageView.xaml" />
     <None Remove="Feature\BoardsManagement\SearchControl\BoardsSearchControl.xaml" />
   </ItemGroup>
@@ -35,6 +36,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Page Update="Feature\BoardsManagement\AddOrEditBoardForm\AddOrEditBoardFormPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Feature\BoardsManagement\BoardsList\BoardsListControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
