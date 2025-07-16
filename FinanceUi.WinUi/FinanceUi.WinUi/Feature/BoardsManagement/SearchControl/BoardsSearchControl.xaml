@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
 
         <AutoSuggestBox 
-            Text="{Binding GetAllBoardsDto.Filter}"
+            Text="{Binding GetAllBoardsDto.Filter, Mode=TwoWay}"
             PlaceholderText="Найти по имени"
             TextChanged="AutoSuggestBox_TextChanged"
             QueryIcon="Find"

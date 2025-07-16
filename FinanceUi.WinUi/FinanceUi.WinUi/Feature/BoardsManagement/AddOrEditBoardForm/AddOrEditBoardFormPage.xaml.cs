@@ -21,10 +21,22 @@ namespace FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm;
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class AddOrEditBoardFormPage : Page
+public sealed partial class AddOrEditBoardFormPage : ContentDialog
 {
+	private AddOrEditBoardFormViewModel? _viewModel;
+
     public AddOrEditBoardFormPage()
     {
         InitializeComponent();
+    }
+
+	private void Page_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+	{
+		_viewModel = (args.NewValue as AddOrEditBoardFormViewModel)!;
+	}
+
+	private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+	{
+		_viewModel?.CreateCommand.NotifyCanExecuteChanged();
     }
 }

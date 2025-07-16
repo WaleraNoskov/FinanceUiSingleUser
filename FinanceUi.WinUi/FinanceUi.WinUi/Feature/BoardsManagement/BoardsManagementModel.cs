@@ -33,7 +33,10 @@ public class BoardsManagementModel : DisposableObservableObject
         _getAllDto = new GetAllBoardsDto
         {
             Filter = string.Empty,
-            PaginationParams = new Core.Contracts.PaginationParams(),
+            PaginationParams = new Core.Contracts.PaginationParams()
+            {
+                PageSize = 10
+            },
             SortingParams = new Core.Contracts.SortingParams()
             {
                 PropertyName = "Title"

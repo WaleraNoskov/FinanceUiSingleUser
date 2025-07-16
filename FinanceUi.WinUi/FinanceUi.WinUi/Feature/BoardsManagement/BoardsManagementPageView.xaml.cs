@@ -39,22 +39,13 @@ namespace FinanceUi.WinUi.Feature.BoardsManagement
 
         private async void AddBoardButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog dialog = new ContentDialog();
+			var dialog = new AddOrEditBoardFormPage()
+			{
+				XamlRoot = this.XamlRoot,
+				DataContext = _viewModel.GetAddOrEditFormViewModel
+			};
 
-            var dataContext = _viewModel.AddBoardViewModel;
-
-            dialog.DataContext = dataContext;
-            dialog.XamlRoot = this.XamlRoot;
-            dialog.Style = Microsoft.UI.Xaml.Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-            dialog.Title = "Добавить новую доску";
-            dialog.PrimaryButtonText = "Save";
-            dialog.PrimaryButtonCommand = dataContext.CreateCommand;
-            dialog.CloseButtonText = "Cancel";
-            dialog.DefaultButton = ContentDialogButton.Primary;
-            dialog.Content = new AddOrEditBoardFormPage();
-
-            var result = await dialog.ShowAsync();
-
+			await dialog.ShowAsync();
         }
-    }
+	}
 }

@@ -13,11 +13,11 @@ public class BoardsManagementPageViewModel : DisposableObservableObject
 {
     private readonly BoardsManagementModel _model;
 
-    public BoardsManagementPageViewModel(BoardsManagementModel model, BoardsSearchViewModel searchViewModel, BoardsListViewModel listViewModel)
+    public BoardsManagementPageViewModel(BoardsManagementModel model)
     {
         _model = model;
-        _boardSearchViewModel = searchViewModel;
-        _boardsListViewModel = listViewModel;
+        _boardSearchViewModel = new BoardsSearchViewModel(model);
+        _boardsListViewModel = new BoardsListViewModel(model);
     }
 
     private readonly BoardsSearchViewModel _boardSearchViewModel;
@@ -25,6 +25,8 @@ public class BoardsManagementPageViewModel : DisposableObservableObject
 
     private readonly BoardsListViewModel _boardsListViewModel;
     public BoardsListViewModel BoardsListViewModel => _boardsListViewModel;
+
+    public AddOrEditBoardFormViewModel GetAddOrEditFormViewModel => new AddOrEditBoardFormViewModel(_model);
 
     public AddOrEditBoardFormViewModel AddBoardViewModel => new AddOrEditBoardFormViewModel(_model);
 }
