@@ -19,11 +19,14 @@ public class BoardsListViewModel : DisposableObservableObject
     public BoardsListViewModel(BoardsManagementModel model)
     {
         _model = model;
+		_model.PropertyChanged += _model_PropertyChanged;
 
         RefreshCommand = new AsyncRelayCommand(OnRefreshCommandExecute, CanRehreshCommandExecute);
     }
 
-    public ReadOnlyObservableCollection<BoardDto> Boards => _model.Boards;
+	public ReadOnlyObservableCollection<BoardDto> Boards => _model.Boards;
+
+    public bool IsLoading => _model.IsLoading;
 
     public AddOrEditBoardFormViewModel GetEditBoardViewModel => new AddOrEditBoardFormViewModel(_model)
     {
@@ -38,5 +41,10 @@ public class BoardsListViewModel : DisposableObservableObject
         await _model.RestoreAsync();
     }
     private bool CanRehreshCommandExecute() => !_model.IsLoading;
+
+	private void _model_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+	{
+		OnPropertyChanged(e.PropertyName);
+	}
 }
 

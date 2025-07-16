@@ -7,29 +7,51 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FinanceUi.WinUi.Feature.BoardsManagement"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:searchcontrol="using:FinanceUi.WinUi.Feature.BoardsManagement.SearchControl" 
+    xmlns:paginator="using:FinanceUi.WinUi.Feature.BoardsManagement.Paginator"
+    xmlns:searchcontrol="using:FinanceUi.WinUi.Feature.BoardsManagement.SearchControl"
     d:DataContext="{d:DesignInstance local:BoardsManagementPageViewModel}"
-    mc:Ignorable="d"
-    DataContextChanged="Page_DataContextChanged">
+    DataContextChanged="Page_DataContextChanged"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <searchcontrol:BoardsSearchControl Grid.Row="0" DataContext="{Binding BoardsSearchViewModel}" VerticalAlignment="Center" Margin="16 0 16 0"/>
-        
-        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" Grid.Column="1">
-            <AppBarButton x:Name="AddBoardButton" Icon="Add" Label="Добавить" Click="AddBoardButton_Click"/>
-        </CommandBar>
+        <Grid Margin="16,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <boardslist:BoardsListControl Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding BoardsListViewModel}" />
+            <searchcontrol:BoardsSearchControl VerticalAlignment="Center" DataContext="{Binding BoardsSearchViewModel}" />
+
+            <CommandBar
+                Grid.Column="1"
+                Margin="16,0,0,0"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                DefaultLabelPosition="Right"
+                IsOpen="False">
+                <AppBarButton
+                    x:Name="AddBoardButton"
+                    VerticalAlignment="Center"
+                    Click="AddBoardButton_Click"
+                    Icon="Add"
+                    Label="Добавить" />
+            </CommandBar>
+        </Grid>
+
+        <boardslist:BoardsListControl Grid.Row="1" DataContext="{Binding BoardsListViewModel}" />
+
+        <paginator:BoardsPaginatorView
+            Grid.Row="3"
+            Margin="0,16,0,16"
+            HorizontalAlignment="Right"
+            DataContext="{Binding BoardsPaginatorViewModel}" />
     </Grid>
 </Page>

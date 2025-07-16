@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -22,7 +24,14 @@ public class BoardsManagementModel : DisposableObservableObject
     public bool IsLoading
     {
         get => _isLoading;
-        private set => SetField(ref _isLoading, value); // от DisposableObservableObject
+        private set => SetField(ref _isLoading, value);
+    }
+
+    private int _totalBoardsCount;
+    public int TotalBoardsCount
+    {
+        get => _totalBoardsCount;
+        private set => SetField(ref _totalBoardsCount, value);
     }
 
     public BoardsManagementModel(IBoardService boardService)
@@ -47,7 +56,7 @@ public class BoardsManagementModel : DisposableObservableObject
     public async Task RestoreAsync()
     {
         IsLoading = true;
-        
+
         try
         {
             var result = await _boardService.GetAllAsync(_getAllDto);

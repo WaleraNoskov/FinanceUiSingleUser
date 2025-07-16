@@ -14,6 +14,7 @@
     <None Remove="Feature\BoardsManagement\AddOrEditBoard\AddOrEditBoardFormPage.xaml" />
     <None Remove="Feature\BoardsManagement\BoardsManagementPageView.xaml" />
     <None Remove="Feature\BoardsManagement\DeleteBoardDialog\DeleteBoardDialog.xaml" />
+    <None Remove="Feature\BoardsManagement\Paginator\BoardsPaginatorView.xaml" />
     <None Remove="Feature\BoardsManagement\SearchControl\BoardsSearchControl.xaml" />
   </ItemGroup>
 
@@ -37,6 +38,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Page Update="Feature\BoardsManagement\Paginator\BoardsPaginatorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Feature\BoardsManagement\DeleteBoardDialog\DeleteBoardDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

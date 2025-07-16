@@ -7,50 +7,76 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FinanceUi.WinUi.Feature.BoardsManagement.BoardsList"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:shared="using:FinanceUi.WinUi.Feature.Shared"
     xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
     d:DataContext="{d:DesignInstance local:BoardsListViewModel}"
-    mc:Ignorable="d"
-    DataContextChanged="UserControl_DataContextChanged">
+    DataContextChanged="UserControl_DataContextChanged"
+    mc:Ignorable="d">
 
-    <ListView SelectionMode="None" ItemsSource="{Binding Boards}">
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="board:BoardDto">
-                <Grid
-                    Margin="0 4"
-                    CornerRadius="8"
-                    Padding="16"
-                    BorderThickness="1"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+    <UserControl.Resources>
+        <shared:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
+    </UserControl.Resources>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+    <Grid>
+        <ListView
+            ItemsSource="{Binding Boards}"
+            SelectionMode="None"
+            Visibility="{Binding IsLoading, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="board:BoardDto">
+                    <Grid
+                        Margin="0,4"
+                        Padding="16"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
 
-                    <StackPanel Spacing="12">
-                        <TextBlock Text="{x:Bind Title}" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" Spacing="4">
-                            <TextBlock Text="Накоплено:" Style="{StaticResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="{x:Bind PaidTotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="из" Style="{StaticResource BodyTextBlockStyle}"/>
-                            <TextBlock Text="{x:Bind TotalGoal}" Style="{StaticResource BodyTextBlockStyle}"/>
+                        <StackPanel Spacing="12">
+                            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind Title}" />
+
+                            <StackPanel
+                                Grid.Row="1"
+                                Orientation="Horizontal"
+                                Spacing="4">
+                                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Накоплено:" />
+                                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind PaidTotalGoal}" />
+                                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="из" />
+                                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind TotalGoal}" />
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
 
-                    <SplitButton Content="Выбрать" Grid.Column="1">
-                        <SplitButton.Flyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem x:Name="EditButton" Text="Редактировать" Icon="Edit" Click="EditButton_Click" Tag="{x:Bind Id}"/>
-                                <MenuFlyoutItem x:Name="DeleteButton" Text="Удалить" Icon="Delete" Click="DeleteButton_Click" Tag="{x:Bind Id}"/>
-                            </MenuFlyout>
-                        </SplitButton.Flyout>
-                    </SplitButton>
-                </Grid>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                        <SplitButton Grid.Column="1" Content="Выбрать">
+                            <SplitButton.Flyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem
+                                        x:Name="EditButton"
+                                        Click="EditButton_Click"
+                                        Icon="Edit"
+                                        Tag="{x:Bind Id}"
+                                        Text="Редактировать" />
+                                    <MenuFlyoutItem
+                                        x:Name="DeleteButton"
+                                        Click="DeleteButton_Click"
+                                        Icon="Delete"
+                                        Tag="{x:Bind Id}"
+                                        Text="Удалить" />
+                                </MenuFlyout>
+                            </SplitButton.Flyout>
+                        </SplitButton>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-
+        <ProgressRing
+            Width="60"
+            Height="60"
+            IsActive="{Binding IsLoading}" />
+    </Grid>
 </UserControl>

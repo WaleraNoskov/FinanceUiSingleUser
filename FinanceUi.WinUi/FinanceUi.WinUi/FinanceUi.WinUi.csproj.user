@@ -5,6 +5,9 @@
     <None Update="App.xaml">
       <SubType>Designer</SubType>
     </None>
+    <Page Update="Feature\BoardsManagement\Paginator\BoardsPaginatorView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Feature\BoardsManagement\DeleteBoardDialog\DeleteBoardDialog.xaml">
       <SubType>Designer</SubType>
     </Page>

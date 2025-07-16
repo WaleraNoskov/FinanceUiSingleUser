@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using CommunityToolkit.WinUI;
 using FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -25,27 +26,39 @@ namespace FinanceUi.WinUi.Feature.BoardsManagement
 	/// </summary>
 	public sealed partial class BoardsManagementPageView : Page
 	{
-        private BoardsManagementPageViewModel _viewModel;
+		private BoardsManagementPageViewModel _viewModel;
 
 		public BoardsManagementPageView()
 		{
 			InitializeComponent();
+
 		}
 
-        private void Page_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
-        {
-            _viewModel = (args.NewValue as BoardsManagementPageViewModel)!;
-        }
+		private void Page_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+		{
+			_viewModel = (args.NewValue as BoardsManagementPageViewModel)!;
+		}
 
-        private async void AddBoardButton_Click(object sender, RoutedEventArgs e)
-        {
+		private async void AddBoardButton_Click(object sender, RoutedEventArgs e)
+		{
 			var dialog = new AddOrEditBoardDialogView()
 			{
 				XamlRoot = this.XamlRoot,
 				DataContext = _viewModel.GetAddFormViewModel
 			};
 
-			await dialog.ShowAsync();
-        }
+			var result = await dialog.ShowAsync();
+			if (result == ContentDialogResult.Primary && _viewModel.RefreshCommand.CanExecute(null))
+				await _viewModel.RefreshCommand.ExecuteAsync(null);
+		}
+
+		private async void Page_Loaded(object sender, RoutedEventArgs e)
+		{
+			await DispatcherQueue.EnqueueAsync(async () =>
+			{
+				if (_viewModel.RefreshCommand.CanExecute(null))
+					await _viewModel.RefreshCommand.ExecuteAsync(null);
+			});
+		}
 	}
 }
