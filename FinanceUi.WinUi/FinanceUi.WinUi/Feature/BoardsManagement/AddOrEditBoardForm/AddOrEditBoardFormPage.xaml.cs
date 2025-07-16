@@ -33,10 +33,12 @@ public sealed partial class AddOrEditBoardFormPage : ContentDialog
 	private void Page_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
 	{
 		_viewModel = (args.NewValue as AddOrEditBoardFormViewModel)!;
+		this.Title = _viewModel.IsEditMode ? "Редактирование доски" : "Добавление доски";
+		this.PrimaryButtonText = _viewModel.IsEditMode ? "Сохранить" : "Добавить";
 	}
 
 	private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
 	{
-		_viewModel?.CreateCommand.NotifyCanExecuteChanged();
+		_viewModel?.SaveCommand.NotifyCanExecuteChanged();
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using FinanceUi.Core.Dtos.Board;
+using FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -20,9 +22,40 @@ namespace FinanceUi.WinUi.Feature.BoardsManagement.BoardsList;
 
 public sealed partial class BoardsListControl : UserControl
 {
+	private BoardsListViewModel _viewModel;
+
 	public BoardsListControl()
 	{
 		InitializeComponent();
+	}
+
+	private void UserControl_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+	{
+		_viewModel = (args.NewValue as BoardsListViewModel)!;
+	}
+
+	private async void EditButton_Click(object sender, RoutedEventArgs e)
+	{
+		var guidIsParsed = Guid.TryParse((sender as MenuFlyoutItem)!.Tag.ToString(), out var guid);
+		if (!guidIsParsed)
+			return;
+
+		var dto = _viewModel.Boards.First(b => b.Id == guid);
+		var dataContext = _viewModel.GetEditBoardViewModel;
+		dataContext.BoardDto = new BriefBoardDto
+		{
+			Id = dto.Id,
+			Title = dto.Title
+		};
+
+		var dialog = new AddOrEditBoardFormPage()
+		{
+			XamlRoot = this.XamlRoot,
+			DataContext = dataContext
+		};
+
+
+		await dialog.ShowAsync();
 	}
 }
 

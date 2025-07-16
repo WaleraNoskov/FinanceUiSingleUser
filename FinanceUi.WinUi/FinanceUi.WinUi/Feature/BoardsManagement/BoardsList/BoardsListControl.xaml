@@ -9,7 +9,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
     d:DataContext="{d:DesignInstance local:BoardsListViewModel}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContextChanged="UserControl_DataContextChanged">
 
     <ListView SelectionMode="None" ItemsSource="{Binding Boards}">
         <ListView.ItemTemplate>
@@ -41,7 +42,7 @@
                     <SplitButton Content="Выбрать" Grid.Column="1">
                         <SplitButton.Flyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Text="Редактировать" Icon="Edit"/>
+                                <MenuFlyoutItem x:Name="EditButton" Text="Редактировать" Click="EditButton_Click" Icon="Edit" Tag="{x:Bind Id}"/>
                                 <MenuFlyoutItem Text="Удалить" Icon="Delete"/>
                             </MenuFlyout>
                         </SplitButton.Flyout>

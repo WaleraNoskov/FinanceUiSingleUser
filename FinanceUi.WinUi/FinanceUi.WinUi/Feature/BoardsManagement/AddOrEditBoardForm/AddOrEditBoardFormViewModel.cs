@@ -13,35 +13,56 @@ namespace FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm;
 
 public class AddOrEditBoardFormViewModel : DisposableObservableObject
 {
-    private readonly BoardsManagementModel _model;
+	private readonly BoardsManagementModel _model;
 
-    private BriefBoardDto _boardDto;
-    public BriefBoardDto BoardDto
-    {
-        get => _boardDto;
-        private set => SetField(ref _boardDto, value);
-    }
+	private BriefBoardDto _boardDto;
+	public BriefBoardDto BoardDto
+	{
+		get => _boardDto;
+		set => SetField(ref _boardDto, value);
+	}
 
-    public AddOrEditBoardFormViewModel(BoardsManagementModel model)
-    {
-        _model = model;
+	public AddOrEditBoardFormViewModel(BoardsManagementModel model)
+	{
+		_model = model;
 
-        _boardDto = new();
-        CreateCommand = new AsyncRelayCommand(OnCreateCommandExecuted, CanCreateCommandExecute);
-    }
+		_boardDto = new();
+		SaveCommand = new AsyncRelayCommand(OnSaveCommandExecuted, CanSaveCommandExecute);
+	}
 
-    public IAsyncRelayCommand CreateCommand { get; set; }
-    private async Task OnCreateCommandExecuted()
-    {
-        await _model.CreateBoard(BoardDto);
+	private bool _isEditModel;
+	public bool IsEditMode
+	{
+		get => _isEditModel;
+		set => SetField(ref _isEditModel, value);
+	}
 
-		AppNotification notification = new AppNotificationBuilder()
-	        .AddText($"Доска \"{BoardDto.Title}\" добавлена")
-	        .AddText("Ищите в разделе \"Доски\"")
-	        .BuildNotification();
+	public IAsyncRelayCommand SaveCommand { get; set; }
+	private async Task OnSaveCommandExecuted()
+	{
+		AppNotification notification;
+
+		if (!IsEditMode)
+		{
+			await _model.CreateBoard(BoardDto);
+
+			notification = new AppNotificationBuilder()
+				.AddText($"Доска \"{BoardDto.Title}\" добавлена")
+				.AddText("Ищите в разделе \"Доски\"")
+				.BuildNotification();
+		}
+		else
+		{
+			await _model.UpdateBoard(BoardDto);
+
+			notification = new AppNotificationBuilder()
+				.AddText($"Доска \"{BoardDto.Title}\" обновлена")
+				.AddText("Ищите в разделе \"Доски\"")
+				.BuildNotification();
+		}
 
 		AppNotificationManager.Default.Show(notification);
 	}
-    private bool CanCreateCommandExecute() => !string.IsNullOrWhiteSpace(BoardDto.Title);
+	private bool CanSaveCommandExecute() => !string.IsNullOrWhiteSpace(BoardDto.Title);
 }
 

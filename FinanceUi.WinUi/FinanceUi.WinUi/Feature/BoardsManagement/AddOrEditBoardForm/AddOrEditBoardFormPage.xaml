@@ -6,13 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Добавить доску"
     d:DataContext="{d:DesignInstance local:AddOrEditBoardFormViewModel}"
     CloseButtonText="Отмена"
     DataContextChanged="Page_DataContextChanged"
     DefaultButton="Primary"
-    PrimaryButtonCommand="{Binding CreateCommand}"
-    PrimaryButtonText="Добавить"
+    PrimaryButtonCommand="{Binding SaveCommand}"
     Style="{StaticResource DefaultContentDialogStyle}"
     mc:Ignorable="d">
 

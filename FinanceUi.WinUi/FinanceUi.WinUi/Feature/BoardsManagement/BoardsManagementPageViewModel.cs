@@ -26,7 +26,7 @@ public class BoardsManagementPageViewModel : DisposableObservableObject
     private readonly BoardsListViewModel _boardsListViewModel;
     public BoardsListViewModel BoardsListViewModel => _boardsListViewModel;
 
-    public AddOrEditBoardFormViewModel GetAddOrEditFormViewModel => new AddOrEditBoardFormViewModel(_model);
+    public AddOrEditBoardFormViewModel GetAddFormViewModel => new AddOrEditBoardFormViewModel(_model);
 
     public AddOrEditBoardFormViewModel AddBoardViewModel => new AddOrEditBoardFormViewModel(_model);
 }
