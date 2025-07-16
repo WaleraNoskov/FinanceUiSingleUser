@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
 using FinanceUi.Core.Dtos.Board;
 using FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm;
+using FinanceUi.WinUi.Feature.BoardsManagement.DeleteBoardDialog;
 using FinanceUi.WinUi.Feature.Shared;
 
 namespace FinanceUi.WinUi.Feature.BoardsManagement.BoardsList;
@@ -17,6 +19,8 @@ public class BoardsListViewModel : DisposableObservableObject
     public BoardsListViewModel(BoardsManagementModel model)
     {
         _model = model;
+
+        RefreshCommand = new AsyncRelayCommand(OnRefreshCommandExecute, CanRehreshCommandExecute);
     }
 
     public ReadOnlyObservableCollection<BoardDto> Boards => _model.Boards;
@@ -25,5 +29,14 @@ public class BoardsListViewModel : DisposableObservableObject
     {
         IsEditMode = true
     };
+
+    public DeleteBoardDialogViewModel GetDeleteBoardDialogViewModel => new DeleteBoardDialogViewModel(_model);
+
+    public IAsyncRelayCommand RefreshCommand { get; set; }
+    private async Task OnRefreshCommandExecute()
+    {
+        await _model.RestoreAsync();
+    }
+    private bool CanRehreshCommandExecute() => !_model.IsLoading;
 }
 

@@ -39,7 +39,7 @@ namespace FinanceUi.WinUi.Feature.BoardsManagement
 
         private async void AddBoardButton_Click(object sender, RoutedEventArgs e)
         {
-			var dialog = new AddOrEditBoardFormPage()
+			var dialog = new AddOrEditBoardDialogView()
 			{
 				XamlRoot = this.XamlRoot,
 				DataContext = _viewModel.GetAddFormViewModel

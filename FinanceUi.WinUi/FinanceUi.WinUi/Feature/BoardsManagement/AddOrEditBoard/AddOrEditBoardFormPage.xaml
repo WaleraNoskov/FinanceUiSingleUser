@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentDialog
-    x:Class="FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm.AddOrEditBoardFormPage"
+    x:Class="FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm.AddOrEditBoardDialogView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,6 +10,7 @@
     CloseButtonText="Отмена"
     DataContextChanged="Page_DataContextChanged"
     DefaultButton="Primary"
+    IsPrimaryButtonEnabled="{Binding IsValid}"
     PrimaryButtonCommand="{Binding SaveCommand}"
     Style="{StaticResource DefaultContentDialogStyle}"
     mc:Ignorable="d">
@@ -18,7 +19,6 @@
         <TextBox
             Header="Название"
             PlaceholderText="Введите название"
-            Text="{Binding BoardDto.Title, Mode=TwoWay}"
-            TextChanged="TextBox_TextChanged" />
+            Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 </ContentDialog>

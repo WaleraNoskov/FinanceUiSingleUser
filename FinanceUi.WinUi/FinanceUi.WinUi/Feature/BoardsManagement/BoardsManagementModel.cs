@@ -66,18 +66,15 @@ public class BoardsManagementModel : DisposableObservableObject
     public async Task CreateBoard(BriefBoardDto board)
     {
         await _boardService.CreateBoard(board);
-        await RestoreAsync();
     }
 
     public async Task UpdateBoard(BriefBoardDto board)
     {
         await _boardService.UpdateBoard(board);
-        await RestoreAsync();
     }
 
     public async Task DeleteBoardAsync(Guid id)
     {
         await _boardService.DeleteBoard(id);
-        await RestoreAsync();
     }
 }

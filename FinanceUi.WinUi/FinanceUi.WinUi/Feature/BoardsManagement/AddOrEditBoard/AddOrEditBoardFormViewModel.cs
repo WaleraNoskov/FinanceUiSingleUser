@@ -15,18 +15,11 @@ public class AddOrEditBoardFormViewModel : DisposableObservableObject
 {
 	private readonly BoardsManagementModel _model;
 
-	private BriefBoardDto _boardDto;
-	public BriefBoardDto BoardDto
-	{
-		get => _boardDto;
-		set => SetField(ref _boardDto, value);
-	}
-
 	public AddOrEditBoardFormViewModel(BoardsManagementModel model)
 	{
 		_model = model;
 
-		_boardDto = new();
+		Title = string.Empty;
 		SaveCommand = new AsyncRelayCommand(OnSaveCommandExecuted, CanSaveCommandExecute);
 	}
 
@@ -37,32 +30,62 @@ public class AddOrEditBoardFormViewModel : DisposableObservableObject
 		set => SetField(ref _isEditModel, value);
 	}
 
+	private string _title;
+	public string Title
+	{
+		get => _title;
+		set
+		{
+			SetField(ref _title, value);
+			OnPropertyChanged(nameof(IsValid));
+		}
+	}
+
+	private BriefBoardDto? _boardDto;
+	public BriefBoardDto? CurrentBoardDto
+	{
+		get => _boardDto;
+		set
+		{
+			SetField(ref _boardDto, value);
+			Title = value?.Title ?? string.Empty;
+		}
+	}
+
+	public bool IsValid => !string.IsNullOrWhiteSpace(Title) && Title != (CurrentBoardDto?.Title ?? string.Empty);
+
 	public IAsyncRelayCommand SaveCommand { get; set; }
 	private async Task OnSaveCommandExecuted()
 	{
+		if (!IsValid)
+			return;
+
+		var dto = CurrentBoardDto ?? new BriefBoardDto();
+		dto.Title = Title;
+
 		AppNotification notification;
 
 		if (!IsEditMode)
 		{
-			await _model.CreateBoard(BoardDto);
+			await _model.CreateBoard(dto);
 
 			notification = new AppNotificationBuilder()
-				.AddText($"Доска \"{BoardDto.Title}\" добавлена")
+				.AddText($"Доска \"{dto.Title}\" добавлена")
 				.AddText("Ищите в разделе \"Доски\"")
 				.BuildNotification();
 		}
 		else
 		{
-			await _model.UpdateBoard(BoardDto);
+			await _model.UpdateBoard(dto);
 
 			notification = new AppNotificationBuilder()
-				.AddText($"Доска \"{BoardDto.Title}\" обновлена")
+				.AddText($"Доска \"{dto.Title}\" обновлена")
 				.AddText("Ищите в разделе \"Доски\"")
 				.BuildNotification();
 		}
 
 		AppNotificationManager.Default.Show(notification);
 	}
-	private bool CanSaveCommandExecute() => !string.IsNullOrWhiteSpace(BoardDto.Title);
+	private bool CanSaveCommandExecute() => IsValid;
 }
 

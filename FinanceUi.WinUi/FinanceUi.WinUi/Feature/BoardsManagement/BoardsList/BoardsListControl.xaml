@@ -42,8 +42,8 @@
                     <SplitButton Content="Выбрать" Grid.Column="1">
                         <SplitButton.Flyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem x:Name="EditButton" Text="Редактировать" Click="EditButton_Click" Icon="Edit" Tag="{x:Bind Id}"/>
-                                <MenuFlyoutItem Text="Удалить" Icon="Delete"/>
+                                <MenuFlyoutItem x:Name="EditButton" Text="Редактировать" Icon="Edit" Click="EditButton_Click" Tag="{x:Bind Id}"/>
+                                <MenuFlyoutItem x:Name="DeleteButton" Text="Удалить" Icon="Delete" Click="DeleteButton_Click" Tag="{x:Bind Id}"/>
                             </MenuFlyout>
                         </SplitButton.Flyout>
                     </SplitButton>
