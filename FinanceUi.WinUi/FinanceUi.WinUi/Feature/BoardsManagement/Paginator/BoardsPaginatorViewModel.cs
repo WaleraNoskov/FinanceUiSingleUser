@@ -10,40 +10,52 @@ using FinanceUi.WinUi.Framework;
 
 namespace FinanceUi.WinUi.Feature.BoardsManagement.Paginator
 {
-	public class BoardsPaginatorViewModel : DisposableObservableObject
-	{
-		private BoardsManagementModel _model;
+    public class BoardsPaginatorViewModel : DisposableObservableObject
+    {
+        private BoardsManagementModel _model;
 
-		public BoardsPaginatorViewModel(BoardsManagementModel model)
-		{
-			_model = model;
+        public BoardsPaginatorViewModel(BoardsManagementModel model)
+        {
+            _model = model;
             _model.PropertyChanged += _model_PropertyChanged;
 
-			RefreshCommand = new AsyncRelayCommand(OnRefreshCommandExecute, CanRefreshCommandExecuted);
-			Pages = new ObservableCollection<int>();
-		}
+            MoveNextCommand = new AsyncRelayCommand(OnMoveNextCommandExecuted, CanMoveNextCommandExecute);
+            MoveBackCommand = new AsyncRelayCommand(OnMoveBackCommandExecuted, CanMoveBackCommandExecute);
+        }
 
-        public ObservableCollection<int> Pages { get; set; }
+        public int CurrentPage => _model.GetAllBoardsDto.PaginationParams.Page;
 
-		public GetAllBoardsDto GetGetAllBoardsDto => _model.GetAllBoardsDto;
+        public int TotalPagesCount => _model.TotalPagesCount;
 
-		public int TotalBoardsCount => _model.TotalBoardsCount;
+        public IAsyncRelayCommand MoveNextCommand { get; private set; }
+        private async Task OnMoveNextCommandExecuted()
+        {
+            if ((CurrentPage + 1) > TotalPagesCount)
+                return;
 
-		public IAsyncRelayCommand RefreshCommand { get; set; }
-		private async Task OnRefreshCommandExecute()
-		{
-			await _model.RestoreAsync();
-		}
-		private bool CanRefreshCommandExecuted() => !_model.IsLoading;
+            _model.GetAllBoardsDto.PaginationParams.Page++;
+            await _model.RestoreAsync();
+        }
+        private bool CanMoveNextCommandExecute() => (CurrentPage + 1) <= TotalPagesCount;
+
+        public IAsyncRelayCommand MoveBackCommand { get; private set; }
+        private async Task OnMoveBackCommandExecuted()
+        {
+            if (CurrentPage <= 1)
+                return;
+
+            _model.GetAllBoardsDto.PaginationParams.Page--;
+            await _model.RestoreAsync();
+        }
+        private bool CanMoveBackCommandExecute() => CurrentPage > 1;
 
         private void _model_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == nameof(_model.TotalBoardsCount))
-			{
-				Pages.Clear();
-				for (var i = 1; i <= _model.TotalBoardsCount; i++)
-					Pages.Add(i);
-			}
+            OnPropertyChanged(nameof(TotalPagesCount));
+            OnPropertyChanged(nameof(CurrentPage));
+
+            MoveNextCommand.NotifyCanExecuteChanged();
+            MoveBackCommand.NotifyCanExecuteChanged();
         }
     }
 }

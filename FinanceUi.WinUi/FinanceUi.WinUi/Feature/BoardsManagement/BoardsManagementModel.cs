@@ -34,6 +34,13 @@ public class BoardsManagementModel : DisposableObservableObject
         private set => SetField(ref _totalBoardsCount, value);
     }
 
+    private int _totalPagesCount;
+    public int TotalPagesCount
+    {
+        get => _totalPagesCount;
+        set => SetField(ref _totalPagesCount, value);
+    }
+
     public BoardsManagementModel(IBoardService boardService)
     {
         _boardService = boardService;
@@ -44,6 +51,7 @@ public class BoardsManagementModel : DisposableObservableObject
             Filter = string.Empty,
             PaginationParams = new Core.Contracts.PaginationParams()
             {
+                Page = 1,
                 PageSize = 10
             },
             SortingParams = new Core.Contracts.SortingParams()
@@ -65,6 +73,11 @@ public class BoardsManagementModel : DisposableObservableObject
                 _boards.Add(board);
 
             TotalBoardsCount = result.TotalCount;
+
+            var totalPages = result.TotalCount / _getAllDto.PaginationParams.PageSize;
+            if (result.TotalCount % _getAllDto.PaginationParams.PageSize > 0)
+                totalPages++;
+            TotalPagesCount = totalPages;
         }
         catch (Exception ex)
         {

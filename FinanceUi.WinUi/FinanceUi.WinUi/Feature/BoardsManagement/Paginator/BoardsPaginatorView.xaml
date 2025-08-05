@@ -10,42 +10,21 @@
     DataContextChanged="UserControl_DataContextChanged"
     mc:Ignorable="d">
 
-    <ListView
-    ItemsSource="{Binding Pages}"
-    SelectedItem="{Binding SelectedPage, Mode=TwoWay}"
-    SelectionMode="Single"
-    Background="Transparent"
-    BorderThickness="0"
-    ScrollViewer.HorizontalScrollMode="Enabled"
-    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <StackPanel Orientation="Horizontal" Spacing="12">
+        <Button Command="{Binding MoveBackCommand}">
+            <FontIcon Glyph="&#xE76B;" />
+        </Button>
 
-        <ListView.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal"/>
-            </ItemsPanelTemplate>
-        </ListView.ItemsPanel>
+        <TextBlock VerticalAlignment="Center">
+            <Run Text="{Binding CurrentPage}"/>
+            <Run Text="из"/>
+            <Run Text="{Binding TotalPagesCount}"/>
+        </TextBlock>
 
-        <ListView.ItemContainerStyle>
-            <Style TargetType="ListViewItem">
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="Padding" Value="8, 0, 8, 0"/>
-                <Setter Property="MinWidth" Value="8"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-            </Style>
-        </ListView.ItemContainerStyle>
-
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="x:Int32">
-                <TextBlock
-                Text="{x:Bind}"
-                FontSize="14"
-                FontWeight="SemiBold"
-                HorizontalAlignment="Center"/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+        <Button Command="{Binding MoveNextCommand}">
+            <FontIcon Glyph="&#xE76C;" />
+        </Button>
+    </StackPanel>
 
 
 </UserControl>
