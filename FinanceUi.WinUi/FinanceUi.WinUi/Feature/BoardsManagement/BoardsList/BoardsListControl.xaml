@@ -15,10 +15,12 @@
 
     <UserControl.Resources>
         <shared:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter" />
+        <local:CurrentBoardToVisibilityConverter x:Name="CurrentBoardToVisibilityConverter" />
     </UserControl.Resources>
 
     <Grid>
         <ListView
+            x:Name="BoardsList"
             ItemsSource="{Binding Boards}"
             SelectionMode="None"
             Visibility="{Binding IsLoading, Converter={StaticResource InvertedBoolToVisibilityConverter}}">
@@ -51,24 +53,41 @@
                             </StackPanel>
                         </StackPanel>
 
-                        <SplitButton Grid.Column="1" Content="Выбрать">
-                            <SplitButton.Flyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem
-                                        x:Name="EditButton"
-                                        Click="EditButton_Click"
-                                        Icon="Edit"
-                                        Tag="{x:Bind Id}"
-                                        Text="Редактировать" />
-                                    <MenuFlyoutItem
-                                        x:Name="DeleteButton"
-                                        Click="DeleteButton_Click"
-                                        Icon="Delete"
-                                        Tag="{x:Bind Id}"
-                                        Text="Удалить" />
-                                </MenuFlyout>
-                            </SplitButton.Flyout>
-                        </SplitButton>
+                        <StackPanel
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            Spacing="12">
+                            
+                            <FontIcon
+                                Foreground="{StaticResource AccentTextFillColorPrimaryBrush}"
+                                Glyph="&#xF78C;"
+                                Tag="{x:Bind Id}"
+                                Visibility="{Binding ElementName=BoardsList,
+                                    Path=DataContext.CurrentBoardId,
+                                    Converter={StaticResource CurrentBoardToVisibilityConverter}}"/>
+
+                            <SplitButton
+                                Command="{Binding ElementName=BoardsList, Path=DataContext.SetCurrentBoardIdCommand}"
+                                CommandParameter="{x:Bind Id}"
+                                Content="Выбрать">
+                                <SplitButton.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem
+                                            x:Name="EditButton"
+                                            Click="EditButton_Click"
+                                            Icon="Edit"
+                                            Tag="{x:Bind Id}"
+                                            Text="Редактировать" />
+                                        <MenuFlyoutItem
+                                            x:Name="DeleteButton"
+                                            Click="DeleteButton_Click"
+                                            Icon="Delete"
+                                            Tag="{x:Bind Id}"
+                                            Text="Удалить" />
+                                    </MenuFlyout>
+                                </SplitButton.Flyout>
+                            </SplitButton>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 
-namespace FinanceUi.WinUi.Feature.Shared
-{
+namespace FinanceUi.WinUi.Feature.Shared;
+
 	internal class InvertedBoolToVisibilityConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, string language)
@@ -34,4 +34,3 @@ namespace FinanceUi.WinUi.Feature.Shared
 			return true;
 		}
 	}
-}

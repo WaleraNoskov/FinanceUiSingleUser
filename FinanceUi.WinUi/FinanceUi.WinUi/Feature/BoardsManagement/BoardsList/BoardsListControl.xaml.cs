@@ -82,7 +82,9 @@ public sealed partial class BoardsListControl : UserControl
 		};
 
 
-		await dialog.ShowAsync();
-	}
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary && _viewModel.RefreshCommand.CanExecute(null))
+            await _viewModel.RefreshCommand.ExecuteAsync(null);
+    }
 }
 

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using FinanceUi.Core.Dtos.Board;
 using FinanceUi.Core.Services;
-using FinanceUi.WinUi.Feature.Shared;
+using FinanceUi.WinUi.Framework;
 
 namespace FinanceUi.WinUi.Feature.BoardsManagement;
 
@@ -63,6 +63,8 @@ public class BoardsManagementModel : DisposableObservableObject
             _boards.Clear();
             foreach (var board in result.Items)
                 _boards.Add(board);
+
+            TotalBoardsCount = result.TotalCount;
         }
         catch (Exception ex)
         {

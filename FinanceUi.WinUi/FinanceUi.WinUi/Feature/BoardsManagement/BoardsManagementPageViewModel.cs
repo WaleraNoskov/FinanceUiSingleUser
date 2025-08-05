@@ -5,7 +5,8 @@ using FinanceUi.WinUi.Feature.BoardsManagement.AddOrEditBoardForm;
 using FinanceUi.WinUi.Feature.BoardsManagement.BoardsList;
 using FinanceUi.WinUi.Feature.BoardsManagement.Paginator;
 using FinanceUi.WinUi.Feature.BoardsManagement.SearchControl;
-using FinanceUi.WinUi.Feature.Shared;
+using FinanceUi.WinUi.Framework;
+using FinanceUi.WinUi.State;
 using System.Threading.Tasks;
 
 namespace FinanceUi.WinUi.Feature.BoardsManagement;
@@ -14,13 +15,13 @@ public class BoardsManagementPageViewModel : DisposableObservableObject
 {
 	private readonly BoardsManagementModel _model;
 
-	public BoardsManagementPageViewModel(BoardsManagementModel model)
+	public BoardsManagementPageViewModel(BoardsManagementModel model, CurrentBoardStateService currentBoardStateService)
 	{
 		_model = model;
 		_model.PropertyChanged += _model_PropertyChanged; ;
 
 		_boardSearchViewModel = new BoardsSearchViewModel(model);
-		_boardsListViewModel = new BoardsListViewModel(model);
+		_boardsListViewModel = new BoardsListViewModel(model, currentBoardStateService);
 		_boardsPaginatorViewModel = new BoardsPaginatorViewModel(model);
 
 		RefreshCommand = new AsyncRelayCommand(OnRefreshAsyncCommandExecute, CanRefreshAsyncCommandExecute);

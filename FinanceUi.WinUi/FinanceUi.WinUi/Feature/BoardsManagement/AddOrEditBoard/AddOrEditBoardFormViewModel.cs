@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using FinanceUi.Core.Dtos.Board;
-using FinanceUi.WinUi.Feature.Shared;
+using FinanceUi.WinUi.Framework;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
 

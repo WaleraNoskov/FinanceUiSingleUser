@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace FinanceUi.WinUi.Feature.Shared;
+namespace FinanceUi.WinUi.Framework;
 
 /// <summary> Base View Model </summary>
 public class DisposableObservableObject : INotifyPropertyChanged, IDisposable
