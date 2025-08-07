@@ -7,6 +7,9 @@ public class Payment : BaseEntity
 {
     public string Name { get; set; }
     public decimal Amount { get; set; }
+    public DateOnly Date { get; set; }
+
+    //for future usage.
     public Periodicity Periodicity { get; set; }
 
     public Guid BoardId { get; set; }

@@ -140,6 +140,7 @@ public static class DependencyInjection
 			Id = p.Id,
 			Name = p.Name,
 			Amount = p.Amount,
+			Date = p.Date,
 			BoardId = p.BoardId,
 			BoardTitle = p.Board?.Title ?? string.Empty,
 			GoalId = p.GoalId,
@@ -151,6 +152,7 @@ public static class DependencyInjection
 			Id = dto.Id,
 			Name = dto.Name,
 			Amount = dto.Amount,
+			Date = dto.Date,
 			BoardId = dto.BoardId,
 			GoalId = dto.GoalId,
 			Periodicity = dto.Periodicity
@@ -161,6 +163,7 @@ public static class DependencyInjection
 			Id = p.Id,
 			Name = p.Name,
 			Amount = p.Amount,
+			Date = p.Date,
 			BoardId = p.BoardId,
 			GoalId = p.GoalId,
 			Periodicity = p.Periodicity
@@ -170,6 +173,7 @@ public static class DependencyInjection
 			Id = dto.Id,
 			Name = dto.Name,
 			Amount = dto.Amount,
+			Date = dto.Date,
 			BoardId = dto.BoardId,
 			GoalId = dto.GoalId,
 			Periodicity = dto.Periodicity

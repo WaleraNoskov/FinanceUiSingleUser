@@ -11,20 +11,29 @@ namespace FinanceUi.Infrastructure.Repositories;
 public class PaymentRepository(AppDbContext dbContext, IObjectMapper mapper) : IPaymentRepository
 {
 
-	public async Task<PaginationResult<PaymentDto>> GetAllAsync(GetAllPaymentsDto dto)
+    public async Task<PaginationResult<PaymentDto>> GetAllAsync(GetAllPaymentsDto dto)
     {
         var query = dbContext.Payments.AsQueryable();
 
-        if (!string.IsNullOrWhiteSpace(dto.Filter))
-        {
-            query = query.Where(p => p.Name.ToLower().Contains(dto.Filter.ToLower()));
-        }
+        var filtered = query
+            .Where(p => p.Date <= dto.Period.StartDate && p.Date <= dto.Period.EndDate);
+        if (!string.IsNullOrEmpty(dto.Filter))
+            filtered = filtered.Where(p => p.Name.ToLower().Contains(dto.Filter.ToLower()));
 
-        var sorted = query.OrderByDynamic(dto.SortingParams.PropertyName, dto.SortingParams.IsDescending);
+        if (dto.IsForGoal)
+            filtered = filtered.Where(p => p.GoalId != null);
+        else
+            filtered = filtered.Where(p => p.GoalId == null);
 
-        var paginated = sorted
-            .Skip((dto.PaginationParams.Page - 1) * dto.PaginationParams.PageSize)
-            .Take(dto.PaginationParams.PageSize);
+        var sorted = dto.SortingParams is not null
+            ? filtered.OrderByDynamic(dto.SortingParams.PropertyName, dto.SortingParams.IsDescending)
+            : filtered;
+
+        var paginated = dto.PaginationParams is not null
+            ? sorted
+                .Skip((dto.PaginationParams.Page - 1) * dto.PaginationParams.PageSize)
+                .Take(dto.PaginationParams.PageSize)
+            : sorted;
 
         var items = await paginated
             .Select(p => mapper.Map<Payment, PaymentDto>(p))
@@ -40,7 +49,7 @@ public class PaymentRepository(AppDbContext dbContext, IObjectMapper mapper) : I
         var payment = await dbContext.Payments.FirstOrDefaultAsync(p => p.Id == id);
         return payment is not null ? mapper.Map<Payment, PaymentDto>(payment) : null;
 
-	}
+    }
 
     public async Task<Guid> CreateAsync(BriefPaymentDto dto)
     {

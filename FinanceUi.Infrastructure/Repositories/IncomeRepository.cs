@@ -14,16 +14,16 @@ public class IncomeRepository(AppDbContext dbContext, IObjectMapper mapper) : II
     {
         var query = dbContext.Incomes.AsQueryable();
 
-        if (!string.IsNullOrWhiteSpace(dto.Filter))
-        {
-            query = query.Where(i => i.Name.ToLower().Contains(dto.Filter.ToLower()));
-        }
+        var fitltered = query.Where(i => i.Date >= dto.Period.StartDate && i.Date <= dto.Period.EndDate);
+        fitltered = !string.IsNullOrEmpty(dto.Filter) ? fitltered.Where(i => i.Name.ToLower().Contains(dto.Filter.ToLower())) : fitltered;
 
-        var sorted = query.OrderByDynamic(dto.SortingParams.PropertyName, dto.SortingParams.IsDescending);
+        var sorted = dto.SortingParams is not null ? fitltered.OrderByDynamic(dto.SortingParams.PropertyName, dto.SortingParams.IsDescending) : fitltered;
 
-        var paginated = sorted
-            .Skip((dto.PaginationParams.Page - 1) * dto.PaginationParams.PageSize)
-            .Take(dto.PaginationParams.PageSize);
+        var paginated = dto.PaginationParams is not null
+            ? sorted
+                .Skip((dto.PaginationParams.Page - 1) * dto.PaginationParams.PageSize)
+                .Take(dto.PaginationParams.PageSize)
+            : sorted;
 
         var items = await paginated
             .Select(i => mapper.Map<Income, IncomeDto>(i))
@@ -38,7 +38,7 @@ public class IncomeRepository(AppDbContext dbContext, IObjectMapper mapper) : II
     {
         var income = await dbContext.Incomes.FirstOrDefaultAsync(i => i.Id == id);
         return income is not null ? mapper.Map<Income, IncomeDto>(income) : null;
-	}
+    }
 
     public async Task<Guid> CreateAsync(BriefIncomeDto dto)
     {
