@@ -11,4 +11,10 @@ public class GetColumnDto
 {
     public Guid BoardId { get; set; }
     public Period Period { get; set; }
+
+    public GetColumnDto(Guid boardId, Period period)
+    {
+        BoardId = boardId;
+        Period = period;
+    }
 }
